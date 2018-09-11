@@ -1,29 +1,13 @@
-import lxml.etree as ET
-import styles
-
 class Scene:
-    def __init__(self, resolution=styles.resolution):
+    def __init__(self):
         """
-        dict -> None
-        :param resolution: a dictionary specifying the resolution of the scene
+        None -> None
         """
-        self._root = ET.Element('svg', resolution)
-        self.width = int(resolution['width'])
-        self.height = int(resolution['height'])
+        this._frames = []
 
-    def add(self, node):
+    def add(self, frame):
         """
-        ET.Element -> None
-        :param node: an ET.Element object that you want to add to the frame
+        Frame -> None
+        :param frame: a frame in the scene
         """
-        self._root.append(node)
-
-    def write(self, file, mode='wb'):
-        """
-        str, str -> None
-        :param file: file name to write to
-        :param [mode]: file write mode
-        """
-        tree = ET.ElementTree(self._root)
-        with open(file, mode) as f:
-            tree.write(open(file, mode))
+        this._frames.append(frame)
