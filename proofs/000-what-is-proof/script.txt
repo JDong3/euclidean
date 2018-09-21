@@ -1,0 +1,27 @@
+Intro:
+
+when mathematicians talk about a "proof" it is generally in the context of a theorem, the proof of a theorem.
+
+A theorem is often written in a very natural form of a English sentence, such as "the sum of the squared shorter sides of a right angle triangle equals the squared length of the hypotenuse", or maybe there is a diagram of a right angle triangle and there is a statement by it saying "a^2 + b^2 = c^2".
+
+While there is nothing wrong with the way that Pythagoras's theorem is written, it is not exactly clear how you would approach proving it. It is often much more helpful to write the theorem in an "if then" implication form, "if a and b are the lengths of the non hypotenuse sides of a right angle triangle, and c is the length of the hypotenuse of that triangle, then a^2 + b^2 = c^2".
+
+This way of writing the theorem lets us clearly see the preconditions so we can start from there and use mathematical and logical manipulations along with previously proven results the arrive at our post condition that "a^2 + b^2 = c^2"
+
+Now our proof for Pythagoras's theorem relies on a previously known theorem, in the context of a proof, we call it a lemma.
+
+Lemma 1:
+a square with side length a + b, has area "(a + b)^2" and also has area "2ab + c^2"
+
+A = (a + b)^2 = 2ab + c^2
+
+* draw square with side length a + b
+* connect the end of the b section to the other b sections when you explain the other area computation
+now you may see why knowing this fact about the square is useful, because it turns out that the a, b, and c correspond to sides of a right angle triangle
+
+now we know that
+(a+b)^2 = 2ab + c^2
+by lemma 1
+
+we can expand the left hand side
+a^2 + 2ab + b^2

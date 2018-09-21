@@ -9,23 +9,11 @@ class Point:
         :param y: the y location of the point
         :param [style_update]: dictioary to update the default
         """
-        self.update(x, y)
-        self._style = {**styles.point, **style_update}
-
-    def update(self, x, y):
-        """
-        int, int -> None
-        :param x: new x coordinate
-        :param y: new y coordinate
-        """
         self.x = x
         self.y = y
-        location = {
-            'cx': str(self.x),
-            'cy': str(self.y)
-        }
-        self._style = {**self._style, **location}
-
+        self.__style = {**styles.point, **style_update}
+        self.__style['cx'] = str(self.x)
+        self.__style['cy'] = str(self.y)
 
     def markup(self):
         """
@@ -39,4 +27,4 @@ class Point:
         None -> lxml.etree.Element
         :return: the lxml.etree.Element that represents the point
         """
-        return ET.Element('circle', self._style)
+        return ET.Element('circle', self.__style)
