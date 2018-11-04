@@ -1,5 +1,8 @@
+from constants import DISPLAY
+from styles import STD_COLOR
+
 class Math:
-    def __init__(self, content, display='displaystyle', color='black'):
+    def __init__(self, content, display=DISPLAY, color=STD_COLOR):
         self.display = display
         self.b_color = color
         self.content = content
