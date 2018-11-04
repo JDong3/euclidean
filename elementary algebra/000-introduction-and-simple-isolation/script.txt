@@ -1,14 +1,14 @@
 COURSE PREFACE
 
-elementary algebra (a serious introduction to mathematics)
+elementary algebra (an introduction to serious mathematics)
 
 This video is an introduction to a video series about elementary algebra. So elementary algebra is a very useful extension to normal arithmetic. This topic usually deals with matters such as variables, equations, systems of equations, functions, and interpretation of functions and equations
 
-since this is my video series I will be also including some of my favorite topics such as logic and proofs to a certain extent.
+since this is my video series I will be also including some of my favorite topics such as logic and proofs to a certain extent because I think that they are pretty important
 
-And of course please do the practice questions, they will help you understand the concepts explored in this video better.
+And of course if you are serious about math please do the practice questions, they will help you understand the concepts better
 
-Now be before we begin, I would like to note that this series does not require knowledge of anything other and basic arithmetic, but to make sure that we are on the same page lets just review a few facts.
+Now be before we begin, I would like to note that this series does not require knowledge of anything other and basic arithmetic, but to make sure that we are on the same page please note that.
 
 -1 * -1 = 1, -1 + -1 = 0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,13 +18,13 @@ Lets begin, first I want to introduce the idea of a variable
 
 "x"
 
-at this point x can be any number, we say
+at this point x can be any number, we say that
 
 "x in R"
 
 x is in the set of real numbers, the set real numbers contain every single number, with and without decimals
 
-normally we denote variables with letters  from the start or end of the English alphabet
+normally we denote variables with letters from the start or end of the English alphabet
 
 x, y, z, a, b, c
 
@@ -34,9 +34,10 @@ Lets move on to what an equation is, an equations is two strings of characters a
 
 x - 5 = 2
 
-It is important to remember that an equation is actually a judgement. So we can think of our equation x - 5 = 2 as a judgement (statement) that says
+It is important to remember that an equation is actually a judgement. So when we write x - 5 = 2 what we are actually saying is that
 
 x - 5 = 2 is true
+
 x minus 5 equals 2 is true, or x - 5 **is** equal to 2
 
 lets define our equation like this just so that we get used to the idea
@@ -61,6 +62,8 @@ add2[1] can be read as, apply the function add2 to 1, if I apply add 2 to 1 I ge
 
 I can also apply the function to a variable, a general number
 add2[a] = a + 2
+
+don't think about this too much its not that important yet
 
 if x = y is true
 then f[x] = f[x] is true
@@ -147,3 +150,11 @@ theorem 2: for all x, x^2 = k is true => x = +- sqrt[k]
 
 practice questions
 ...
+
+x + 1 = 0
+x - 1 = 2
+2x = 1
+x/5 = 2
+(2x + 15)/3 = 2
+x^2 - 4 = 0
+(2x^2 + 15/3)/(5 + 3/2) = 1

@@ -17,27 +17,19 @@ class Line:
         self.dx = self.b.x - self.a.x
         self.dy = self.b.y - self.a.y
 
+        # length of the line
+        self.length = math.sqrt(self.dx**2 + self.dy**2)
+        # rounded length of the line
+        self.rlength = round(self.length)
+
+        # style sheet for the line
         self.__style = {**styles.line, **style_update}
-        self.__style['x1'] = str(self.a.x)
-        self.__style['y1'] = str(self.a.y)
-        self.__style['x2'] = str(self.b.x)
-        self.__style['y2'] = str(self.b.y)
+        self.__style['x1'] = str(a.x)
+        self.__style['y1'] = str(a.y)
+        self.__style['x2'] = str(b.x)
+        self.__style['y2'] = str(b.y)
 
-    def node(self):
-        """
-        None -> lxml.etree.Element
-        :return: the lxml.etree.Element that represents the line
-        """
-        return ET.Element('line', self.__style)
-
-    def length(self, roundOff=True):
-        """
-        bool -> int or float
-        :param [roundOff]: if you want to round the result or note
-        :return: the length of the line
-        """
-        res = math.sqrt(self.dx**2 + self.dy**2)
-        return roundOff and round(res) or not roundOff and res
+        self.node = ET.Element('line', self.__style)
 
     @staticmethod
     def construct(line, frame_count):
@@ -56,5 +48,5 @@ class Line:
         for i in range(frame_count):
             b_i =  Point(*b(i))
             next_line = Line(a, b_i)
-            res.append(next_line.node())
+            res.append(next_line.node)
         return res

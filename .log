@@ -1,0 +1,32 @@
+This is XeTeX, Version 3.14159265-2.6-0.99998 (MiKTeX 2.9.6500 64-bit) (preloaded format=xelatex 2018.10.5)  1 NOV 2018 20:53
+entering extended mode
+**@^^Z
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\.tex"
+! Interruption.
+<to be read again> 
+                   \begingroup 
+l.1 
+    %%
+? 
+LaTeX2e <2017-04-15>
+! Interruption.
+<everyjob> ...out {\fmtname \space <\fmtversion >}
+                                                  \typeout {Babel <3.15> and...
+l.1 
+    %%
+? 연연^^Z
+Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+H for help, X to quit.
+? x
+ 
+Here is how much of TeX's memory you used:
+ 5 strings out of 427839
+ 53 string characters out of 3152538
+ 60990 words of memory out of 3000000
+ 4059 multiletter control sequences out of 15000+200000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 1328 hyphenation exceptions out of 8191
+ 5i,0n,1p,11b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+No pages of output.
