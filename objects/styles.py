@@ -15,8 +15,8 @@ line = {
 }
 
 resolution = {
-    'height': str(STD_WIDTH),
-    'width': str(STD_HEIGHT)
+    'width': str(STD_WIDTH),
+    'height': str(STD_HEIGHT)
 }
 
 circle = {

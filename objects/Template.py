@@ -22,7 +22,3 @@ class Template:
 
         with open(TEMPLATE_FILE, 'w+') as f:
             [f.write(f'{line}\n') for line in res]
-
-
-t = Template(['amsfonts','tikz'])
-t.writeTemplate()

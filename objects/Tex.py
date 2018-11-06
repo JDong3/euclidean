@@ -1,7 +1,7 @@
 import subprocess as sp
 import os
 from hashlib import sha256
-from constants import TEMPLATE_FILE
+from constants import TEMPLATE_FILE, TEX_OUTPUT, TEX_AUXILIARY
 
 class Tex:
     """
@@ -18,18 +18,22 @@ class Tex:
     def writeSvg(self, cleanup=True):
         self._contentToTex()
 
-        not os.path.exists('aux') and os.mkdir('aux-dir')
-        not os.path.exists('out') and os.mkdir('out-dir')
+        if not os.path.exists(TEX_AUXILIARY):
+            os.mkdir(TEX_AUXILIARY)
+        if not os.path.exists(TEX_OUTPUT):
+            os.mkdir(TEX_OUTPUT)
 
         args = [
             'latex',
-            '-aux-directory=aux-dir',
-            '-output-directory=out-dir',
+            f'-aux-directory={TEX_AUXILIARY}',
+            f'-output-directory={TEX_OUTPUT}',
             f'{self.name}.tex']
         sp.run(args)
 
-        args = ['dvisvgm', '-n', f'out-dir/{self.name}.dvi']
+        args = ['dvisvgm', '-n', f'{TEX_OUTPUT}/{self.name}.dvi']
         sp.run(args)
+
+        self.clean()
 
     def _contentToTex(self):
         """
@@ -40,3 +44,20 @@ class Tex:
         res.insert(-1, f'{self.content}\n')
         with open(f'{self.name}.tex', 'w+') as f:
             [f.write(line) for line in res]
+
+    def clean(self, svg=False):
+        """
+        cleans up the files that are created after calling writeSvg
+        """
+        args = [
+            'rm',
+            '-r',
+            TEX_AUXILIARY,
+            TEX_OUTPUT,
+            f'{self.name}.tex',
+        ]
+
+        if svg:
+            args.append(f'{self.name}.svg')
+
+        sp.run(args)

@@ -1,12 +1,41 @@
 import sys
 sys.path.insert(0, '../../objects')
 
+import os
 from Tex import Tex
 from Math import Math
 from Template import Template
-
-x = Template(['mathtools'])
-x.writeTemplate()
+from Point import Point
+from Frame import Frame
+from Scene import Scene
+from Line import Line
+from Circle import Circle
+import styles
 
 t = Tex(Math(r'\sum_{i = 0}^{n} i + i2^i').out)
-t.writeSvg()
+if True:
+    # tex demo
+    x = Template(['mathtools'])
+    x.writeTemplate()
+
+    t.writeSvg()
+
+    # video demo
+    a_x, a_y = 0, 0
+    a = Point(a_x, a_y)
+
+    b_x, b_y = 1920, 1080
+    b = Point(b_x, b_y)
+
+    line = Line(a, b)
+
+    lst = Line.construct(line, 60)
+
+    scene = Scene.fromNodeList(lst)
+    scene.writeVideo('video-out')
+
+if False:
+    os.remove(f'{t.name}.svg')
+    os.remove('video-out/out.mp4')
+    os.removedirs('video-out')
+    os.remove('template.tex')
