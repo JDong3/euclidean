@@ -15,16 +15,5 @@ class Point:
         self.__style['cx'] = str(self.x)
         self.__style['cy'] = str(self.y)
 
-    def markup(self):
-        """
-        None -> str
-        :return: the markup for the lxml.etree.Element that represents the point
-        """
-        return ET.tostring(self.node())
-
-    def node(self):
-        """
-        None -> lxml.etree.Element
-        :return: the lxml.etree.Element that represents the point
-        """
-        return ET.Element('circle', self.__style)
+        self.node = ET.Element('circle', self.__style)
+        self.markup = ET.tostring(self.node)

@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=latex 2018.10.30)  4 NOV 2018 01:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=latex 2018.10.30)  4 NOV 2018 15:15
 entering extended mode
-**./d1995b0f092ae4367cbd72da6dd08d0ba273d197b1f5a018948b7dd532341b9f.tex
-(d1995b0f092ae4367cbd72da6dd08d0ba273d197b1f5a018948b7dd532341b9f.tex
+**./0a4c4685686cb4d7d33d769bb6ec481ed5e1c21e0aa9199101c6c70512b6b515.tex
+(0a4c4685686cb4d7d33d769bb6ec481ed5e1c21e0aa9199101c6c70512b6b515.tex
 LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
@@ -21,8 +21,8 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-No file d1995b0f092ae4367cbd72da6dd08d0ba273d197b1f5a018948b7dd532341b9f.aux.
-\openout1 = `d1995b0f092ae4367cbd72da6dd08d0ba273d197b1f5a018948b7dd532341b9f.a
+No file 0a4c4685686cb4d7d33d769bb6ec481ed5e1c21e0aa9199101c6c70512b6b515.aux.
+\openout1 = `0a4c4685686cb4d7d33d769bb6ec481ed5e1c21e0aa9199101c6c70512b6b515.a
 ux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
@@ -45,8 +45,8 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ]
 ("C:\Users\HP_\project\euclidean\elementary algebra\000-introduction-and-simple
--isolation\aux-dir\d1995b0f092ae4367cbd72da6dd08d0ba273d197b1f5a018948b7dd53234
-1b9f.aux") ) 
+-isolation\aux-dir\0a4c4685686cb4d7d33d769bb6ec481ed5e1c21e0aa9199101c6c70512b6
+b515.aux") ) 
 Here is how much of TeX's memory you used:
  204 strings out of 493313
  3306 string characters out of 3138930
@@ -57,5 +57,5 @@ Here is how much of TeX's memory you used:
  23i,4n,17p,190b,107s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on "C:\Users\HP_\project\euclidean\elementary algebra\000-introd
-uction-and-simple-isolation\out-dir\d1995b0f092ae4367cbd72da6dd08d0ba273d197b1f
-5a018948b7dd532341b9f.dvi" (1 page, 280 bytes).
+uction-and-simple-isolation\out-dir\0a4c4685686cb4d7d33d769bb6ec481ed5e1c21e0aa
+9199101c6c70512b6b515.dvi" (1 page, 324 bytes).
