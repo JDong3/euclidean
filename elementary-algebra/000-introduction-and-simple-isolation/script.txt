@@ -1,160 +1,124 @@
 COURSE PREFACE
 
-elementary algebra (an introduction to serious mathematics)
+elementary algebra (Fundamentals for Higher Mathematics)
 
-This video is an introduction to a video series about elementary algebra. So elementary algebra is a very useful extension to normal arithmetic. This topic usually deals with matters such as variables, equations, systems of equations, functions, and interpretation of functions and equations
+This video is part of a series about elementary algebra or just algebra, which is a natural extension to normal arithmetic. This topic usually deals with ideas regarding the notion of variables, functions of variables, and how to interpret them.
 
-since this is my video series I will be also including some of my favorite topics such as logic and proofs to a certain extent because I think that they are pretty important
+I'm also going to be talking about theorems in mathematics and their proofs, and put an emphasis on interpretation, since I think that those topics help give meaning to the math that were doing.
 
-And of course if you are serious about math please do the practice questions, they will help you understand the concepts better
+Now be before we begin, I would like to note that this series does not require knowledge of anything other and basic arithmetic, and fractions, but to make sure that we are on the same page please note that.
 
-Now be before we begin, I would like to note that this series does not require knowledge of anything other and basic arithmetic, but to make sure that we are on the same page please note that.
-
--1 * -1 = 1, -1 + -1 = 0
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-1 * -1 = 1, -1 - (-1) = 0
+________________________________________________________________________________
 DEFINITIONS AND IDEAS
 
 Lets begin, first I want to introduce the idea of a variable
+A variable is a general quantity, by itself it does not have too much meaning
 
-"x"
+here are some examples of general quantities or "variables"
+"""
+I am x m and y cm tall
+There are x birds in the tree
+"""
 
-at this point x can be any number, we say that
+variables themselves are not very interesting until they are used in the context of an equation, an equation puts restrictions on the value of a variable
 
-"x in R"
-
-x is in the set of real numbers, the set real numbers contain every single number, with and without decimals
-
-normally we denote variables with letters from the start or end of the English alphabet
-
-x, y, z, a, b, c
-
-variables represent the idea of a number, not a specific number, a general one
-
-Lets move on to what an equation is, an equations is two strings of characters and numbers with an equal sign in between them.
-
+"""
 x - 5 = 2
+"""
 
-It is important to remember that an equation is actually a judgement. So when we write x - 5 = 2 what we are actually saying is that
+since we know that x - 5 = 2 is true
+we also know that x = 7 is true
 
-x - 5 = 2 is true
+It is important to remember that an equation is actually an assertion about something. So when we write x - 5 = 2 can be interpreted as
 
+"""
 x minus 5 equals 2 is true, or x - 5 **is** equal to 2
+"""
 
-lets define our equation like this just so that we get used to the idea
+we can write the assertion about x like this
 
 define: x - 5 = 2 is true
 
-Now before we can start to work with equations we need one more thing, we need a rule that tells us how to manipulate these equations. This rule will be a theorem, which is result in mathematics that has been proven in mathematics
+Now before we can start to work with equations we need a rule that tells us how to manipulate these equations.
 
-Theorem 1:
+"""
+Definition 1:
 for all x in R, for all f in F, x = y is true => f[x] = f[y] is true
+"""
 
-ok lets break it down.
-for all x in R, any real number
+for all real numbers x
+for all functions f
+if x is equal to y
+then f applied to x is equal to f applied to y
 
-for all f in F
-any function in f, a function is a description of a modification to a variable, for example I have a function called add2 the function add2 adds 2 to whatever input you give it.
+we can quite easily see why this is the case with this example
 
-add2[1] = 1 + 2
-add2[1] = 3
+"""
+ex 1:
+define 3 = 3 is true
+infer: 3 + 2 = 3 + 2 is true
+infer: 5 = 5 is true
+"""
 
-add2[1] can be read as, apply the function add2 to 1, if I apply add 2 to 1 I get 1 + 2
+the idea of this rule is quite simple, if you know that two quantities are equal (x = y) then if you change both quantities in the equation in the exact same way, they will still be equal after the change (f[x] = f[y])
 
-I can also apply the function to a variable, a general number
-add2[a] = a + 2
+we can now use this rule to do a few problems
 
-don't think about this too much its not that important yet
+"""
+ex 2:
+isolate x
+define: x - 5 = 1
 
-if x = y is true
-then f[x] = f[x] is true
+define: f[x] = x + 5
+f[x - 5] = f[1]
+x - 5 + 5 = 1 + 5
+x = 6
+""
 
-using the example from before
-2 = 2 is true
-add2[2] = add2[2] is true
-2 + 2 = 2 + 2 is true
-4 = 4 is true
-
-the idea of this theorem is quite simple, if I know that two quantities are equal (x = y) then if you change both quantities in the equation in the exact same way, they will still be equal after the change (f[x] = f[y])
-
-now with these tools lets take a look at how we can solve some equations
-
-ex1
-- lets see this theorem in practice
-- using this theorem we can solve for the specific value of x if we only have 1 variable in our equation
-
-define: x - 5 = 1 is true
-
-hypothesize: add5[a] = a + 5
-infer: add5[x - 5] = add5[1] is true, by theorem 1
-infer: x - 5 + 5 = 1 + 5 is true
-infer: x = 6 is true
-
-ex2
+"""
+ex 3:
+isolate x
 define: 3x = 3
 
-hypothesize: divide3[a] = a/3
-infer: divide3[3x] = divide3[3] is true, by theorem 1
-infer: 3x/3 = 3/3 is ture
-infer: x = 1 is true
+define: f[x] = (1/3)x
+f[3x] = f[3]
+x = 1
+"""
 
-ex3
-define: x/5 = 2
-
-often we don't name our functions with meaningful names but just give them a general name like f, g or h
-
-hypothesize: f[a] = 5a
-infer: f[x/5] = f[2] is true
-infer: x/5 * 5 = 2 * 5 is true
-infer: x = 10 is true
-
-ex4
-
+"""
+ex 4:
+isolate x
 define: (2x+5)/4 = 3
 
-hypothesize: f[a] = 4a
-hypothesize: g[a] = a - 5
-hypothesize: h[a] = a/2
-infer: f[(2x+5)/4] = f[3] is true
-infer: (2x+5)/4 * 4 = 3*4 is true
-infer: 2x+5 = 12 is true
-infer: g[2x+5] = g[12] is true
-infer: 2x + 5 - 5 = 12 - 5 is true
-infer: 2x = 7 is true
-infer: h[2x] = h[7]
-infer: x = 7/2 = 3.5 is true
+2x + 5 = 12
+2x = 7
+x = 7/2
+"""
 
-usually people solve equations without writing out in extreme detail every step as I did above, but I wanted to do that for a bit to emphasize that equations make a statement about the truth of something, I do see from time to time people that get confused about equations vs expressions, and even more people that get really confused about proofs so I want to make sure that we are on the same page about this
+"""
+ex 5:
+separate x and y onto different sides of the equality
+define: (x - 2y)/2 = 1
 
-this is how people normally write out their work for solving equations, and you guys can feel free to do it like this
+x - 2y = 2
+x = 2 + 2y
+"""
 
-define: (x+5)/4 = 3+x/3 is true
+"""
+ex 6:
+write terms containing x and y on one side of the equality and the constant on the other side
+define: (2x + y + 3)/3 = 1
 
-(x+5)/4 = (3+2x)/4
-((x+5)/4)*4 = ((3+2x)/4)*4
-x+5-3 = 3+2x - 3
-x + 2 - x = 2x - x
-2 = x
+2x + y + 3 = 3
+2x + y = 0
+"""
 
-x^2 = 4
-sqrt[x^2] = 2
-x = 2, right?
-
-- its true that x = 2 since 2*2 = 4, but -2 * -2 = 4
-
-so
-+-x = 2
-x = +-2
-
-- now we have a new theorem
-theorem 2: for all x, x^2 = k is true => x = +- sqrt[k]
 
 practice questions
-...
 
 x + 1 = 0
 x - 1 = 2
 2x = 1
 x/5 = 2
 (2x + 15)/3 = 2
-x^2 - 4 = 0
-(2x^2 + 15/3)/(5 + 3/2) = 1

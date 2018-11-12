@@ -1,0 +1,35 @@
+last time we took a look at variables and we did some practice manipulating equations to isolate or move around the variables
+
+this time we are going to take a look at the idea of a function and how to interpret it, how they relate to equations with 2 variables, and we will also start do some analysis on a type of function called a linear function
+
+one way to express a function is as a rule that tell you how to map an input to an output
+
+f[x] = 2x
+
+a very useful way to analyze the behavior of a function is to try a list of inputs on the function and make a table of what you get out
+
+table:
+x, f[x]
+1, 2
+2, 4
+3, 6
+4, 8
+5, 10
+
+another powerful way to interpret a function is to find the graph of a function, we can use out table to plot values of x on the horizonal axis against values of f[x] on the vertical axis
+
+we can actually connect the dots to form a line, since everywhere on the line the value on the f[x] axis is twice the value on the x axis
+
+as you can see, the graph of our function is a line, and for that reason its called a linear function
+
+
+
+slope
+
+find the eqn
+
+different forms of the eqn
+
+implicit form
+
+etc
