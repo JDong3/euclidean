@@ -1,5 +1,5 @@
 FADE IN:
-
+b
 ================================================================================
 QUOTE WITH ILLUSTRATIONS
 
@@ -77,46 +77,49 @@ narrator: what an equation does is that it puts restrictions on which values a
 variable can take
 
 narrator: since we know that x - 5 = 2 is true, then we also know that x = 8 is
-true
+true. It is important to remember that an equation is actually an assertion
+about something. So when we write x - 5 = 2 it is very useful to interpret it as
+"x minus 5 equals 2 is true"
 
-narrator: It is important to remember that an equation is actually an assertion about
-something. So when we write x - 5 = 2 can be interpreted as
+fade in animation for x minus 5 equals 2 is true
 
-"""
-x minus 5 equals 2 is true, or x - 5 **is** equal to 2
-"""
+narrator: or x - 5 IS equals to 2, remember to keep these interpretations they
+will be very helpful.
 
-we can write the assertion about x like this
+fade in animation for x minus 5 IS equal to 2
 
-define: x - 5 = 2 is true
+================================================================================
+USEFUL PROPERTY OF EQUALITY
 
-Now before we can start to work with equations we need a rule that tells us how
-to manipulate these equations.
+narrator: In order to work with equations we need a rule that tells us a way to
+rewirte them and still have them make sense
 
-"""
-Definition 1:
-for all x in R, for all f in F, x = y is true => f[x] = f[y] is true
-"""
+fade in animation for property 1 of equality "Definition 1: for all x in R, for
+all f in F, x = y is true => f[x] = f[y] is true "
 
-for all real numbers x
-for all functions f
-if x is equal to y
-then f applied to x is equal to f applied to y
+narrator: for all real numbers x, for all functions f, if x is equal to y, then
+f applied to x is equal to f applied to y. It is actually quite easy to see why
+this property makes sense in this following example.
 
-we can quite easily see why this is the case with this example
+narrator: suppose that 3 = 3 is true
 
-"""
-ex 1:
-define 3 = 3 is true
-infer: 3 + 2 = 3 + 2 is true
-infer: 5 = 5 is true
-"""
+fade in animation for 3 = 3
 
-the idea of this rule is quite simple, if you know that two quantities are equal
-(x = y) then if you change both quantities in the equation in the exact same
-way, they will still be equal after the change (f[x] = f[y])
+narrator: now a function can be interpreted as a rule for how to change an
+input, in this case our change will be +2. So by proprty of equality, we know
+that 3 + 2 = 3 + 2.
 
-we can now use this rule to do a few problems
+fade in animation for 3 + 2 = 3 + 2
+
+narrator: then 5 = 5, which is obviously true.
+
+fade in animation for 5 = 5
+
+narrator: the idea of this rule is quite simple, if you know that two quantities
+are equal (x = y) then if you change both quantities in the exact same way, they
+will still be equal after the change (f[x] = f[y])
+
+================================================================================
 
 """
 ex 2:
