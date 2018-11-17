@@ -1,5 +1,5 @@
 FADE IN:
-b
+
 ================================================================================
 QUOTE WITH ILLUSTRATIONS
 
@@ -116,23 +116,38 @@ narrator: then 5 = 5, which is obviously true.
 fade in animation for 5 = 5
 
 narrator: the idea of this rule is quite simple, if you know that two quantities
-are equal (x = y) then if you change both quantities in the exact same way, they
-will still be equal after the change (f[x] = f[y])
+are equal (x = y) then if you change both quantities in the exact same way, we
+will get two new equal quantities (f[x] = f[y])N
+
+fade out
 
 ================================================================================
+EXAMPLE 1
 
-"""
-ex 2:
-isolate x
-define: x - 5 = 1
+narrator: suppose that x minus 5 equals 1 is true
 
-define: f[x] = x + 5
-f[x - 5] = f[1]
-x - 5 + 5 = 1 + 5
-x = 6
-"""
+fade in animation for "hyp: x - 5 = 1 is true"
 
-"""
+narrator: then using our property from before we know that two equal quantities,
+changing them in the extact way will give use two new equal quantities
+
+fade in animation for "x = y => f[x] = f[y]" on the side
+
+narrator: in this case the our change is adding five so, x minus 5 plus 5 is
+equal to 1 plus 5
+
+fade in animation for "x - 5 + 5 = 1 + 5"
+
+narrator: then x equal 6 is true, and so we have isolated x
+
+fade in animation for "x = 6"
+
+fade out
+
+================================================================================
+EXAMPLE 2
+
+
 ex 3:
 isolate x
 define: 3x = 3
