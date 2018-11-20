@@ -11,9 +11,8 @@ class Point:
         """
         self.x = x
         self.y = y
-        self.__style = {**styles.point, **style_update}
-        self.__style['cx'] = str(self.x)
-        self.__style['cy'] = str(self.y)
+        self.style = {**styles.point, **style_update}
+        self.style['cx'] = str(self.x)
+        self.style['cy'] = str(self.y)
 
-        self.node = ET.Element('circle', self.__style)
-        self.markup = ET.tostring(self.node)
+        self.node = ET.Element('circle', self.style)

@@ -40,3 +40,6 @@ class Gen:
         """
         dx = end[0] - start[0]
         dy = end[1] - start[1]
+        x = lambda i: start[0] + (i * dx)/(size - 1)
+        y = lambda i: start[1] + (i * dx)/(size - 1)
+        return None
