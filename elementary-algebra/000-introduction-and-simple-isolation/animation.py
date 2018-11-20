@@ -10,10 +10,23 @@ from Frame import Frame
 from Scene import Scene
 from Line import Line
 from Circle import Circle
+from Quote import Quote
 import styles
 
+
+# make quote
+p = Point(400, 400)
+outer = Point(500, 500)
+c = Circle(p, outer)
+f = Frame()
+f.add(c.node())
+f.write('circ.svg')
+
+
+
+
 t = Tex(Math(r'\sum_{i = 0}^{n} i + i2^i').out)
-if True:
+if False:
     # tex demo
     x = Template(['mathtools'])
     x.writeTemplate()

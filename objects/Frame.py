@@ -1,6 +1,7 @@
 import lxml.etree as ET
 import styles
 
+
 class Frame:
     def __init__(self, resolution=styles.resolution):
         """
@@ -27,3 +28,7 @@ class Frame:
         tree = ET.ElementTree(self._root)
         with open(file, mode) as f:
             tree.write(open(file, mode))
+
+    @staticmethod
+    def fade(frame) -> list:
+        return None

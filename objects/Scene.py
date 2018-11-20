@@ -1,6 +1,5 @@
 import os
 import subprocess as sp
-from Frame import Frame
 import styles
 from glob import glob
 

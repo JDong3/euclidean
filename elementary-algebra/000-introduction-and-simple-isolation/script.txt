@@ -1,4 +1,4 @@
-FADE IN:
+Fade IN:
 
 ================================================================================
 QUOTE WITH ILLUSTRATIONS
@@ -124,6 +124,8 @@ fade out
 ================================================================================
 EXAMPLE 1
 
+fade in animation for isolate x
+
 narrator: suppose that x minus 5 equals 1 is true
 
 fade in animation for "hyp: x - 5 = 1 is true"
@@ -140,50 +142,81 @@ fade in animation for "x - 5 + 5 = 1 + 5"
 
 narrator: then x equal 6 is true, and so we have isolated x
 
-fade in animation for "x = 6"
+fade in animation for "x = 6" 
 
 fade out
 
 ================================================================================
 EXAMPLE 2
 
+fade in animation for isolate x
 
-ex 3:
-isolate x
-define: 3x = 3
+narrator: suppose that 3x = 3
 
-ndefine: f[x] = (1/3)x
-f[3x] = f[3]
-x = 1
-"""
+fade in animation for hyp 3x = 3 is true
 
-"""
-ex 4:
-isolate x
-define: (2x+5)/4 = 3
+narrator: then we know that 3x/3 = 3/3 by property
 
-2x + 5 = 12
-2x = 7
-x = 7/2
-"""
+fade in animation for 3x/3 = 3/3
 
-"""
-ex 5:
-separate x and y onto different sides of the equality
-define: (x - 2y)/2 = 1
+narrator: then x = 1 is true
 
-x - 2y = 2
-x = 2 + 2y
-"""
+fade in animation for x = 1
 
-""" ex 6: write terms containing x and y on one side of the equality and the
-constant on the other side define: (2x + y + 3)/3 = 1
+================================================================================
+EXAMPLE 3
 
-2x + y + 3 = 3
-2x + y = 0
-"""
+fade in animation for isolate x
 
+narrator: we can repeatedly use the property of equality to isolate x in more
+complicated cases, suppose (2x+5)/4 = 3
 
+fade in animation for hyp: (2x+5)/4 = 3 is true
+
+narrator: then 2x+5 = 12 is true
+
+fade in animation
+
+narrator: then 2x = 7 is true
+
+fade in animation for 2x = 7
+
+narrator: then x = 7/2 is true
+
+fade in animation for x = 7/2
+
+================================================================================
+EXAMPLE 4
+
+fade in animation for separate x and y onto different sides of the equality
+
+narrator: suppose (x - 2y)/2 = 1 is true
+
+fade in animation
+
+narrator: then x - 2y = 2 is true
+
+fade in animation
+
+narrator: then x = 2y + 2 is true
+
+================================================================================
+EXAMPLE 5
+
+fade in animation for write terms containing x and y on one side of the equality
+with the constant on the other side
+
+narrator: suppose (2x+3)/3=y is true
+
+fade in animation
+
+narrator: then 2x + 3 = 3y
+
+fade in animation
+
+narrator: then 2x - 3y = -3
+
+================================================================================
 practice questions
 
 x + 1 = 0

@@ -14,7 +14,7 @@ class Circle:
         default = styles.circle
 
         self.center = center
-        self.r = Line(self.center, outer).length()
+        self.r = Line(self.center, outer).length
         properties = {
             'r': str(self.r),
             'cx': str(self.center.x),
