@@ -1,7 +1,6 @@
 import lxml.etree as ET
 import styles
 
-
 class Frame:
     def __init__(self, resolution=styles.resolution):
         """

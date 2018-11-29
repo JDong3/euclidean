@@ -1,12 +1,13 @@
-from constants import TEMPLATE_FILE
+from .constants import TEMPLATE_FILE, FONT_SIZE, PACKAGES
+
 
 class Template:
-    def __init__(self, packages=[]):
+    def __init__(self, packages=PACKAGES):
         self.packages = packages
 
-    def writeTemplate(self, name=TEMPLATE_FILE):
+    def write(self, name=TEMPLATE_FILE):
         res = []
-        res.append(r'\documentclass{article}')
+        res.append(r'\documentclass[{FONT_SIZE]{article}')
 
         body = [
             r'\begin{document}',

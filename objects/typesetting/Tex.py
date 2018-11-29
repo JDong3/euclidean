@@ -1,7 +1,7 @@
 import subprocess as sp
 import os
 from hashlib import sha256
-from constants import TEMPLATE_FILE, TEX_OUTPUT, TEX_AUXILIARY
+from .constants import TEMPLATE_FILE, TEX_OUTPUT, TEX_AUXILIARY
 
 class Tex:
     """
