@@ -12,9 +12,12 @@ class Quote(Tex):
 
     def _format(self):
         res = ''
+        res += r'\noindent'
         res += r'\fontsize'
         res += f'{{{QUOTE_FONT_SIZE}}}'
         res += f'{{{round(QUOTE_FONT_SIZE * 1.2)}}}'
         res += r'\selectfont '
+        res += '"'
         res += self.quote
+        res += '"'
         return res

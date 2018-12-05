@@ -7,7 +7,7 @@ class Template:
 
     def write(self, name=TEMPLATE_FILE):
         res = []
-        res.append(r'\documentclass[{FONT_SIZE]{article}')
+        res.append(r'\documentclass[{FONT_SIZE}]{article}')
 
         body = [
             r'\begin{document}',

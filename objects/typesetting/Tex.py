@@ -15,7 +15,7 @@ class Tex:
         hashObj.update(content.encode('utf-8'))
         self.name = hashObj.hexdigest()
 
-    def writeSvg(self, cleanup=True):
+    def write(self, cleanup=True):
         self._contentToTex()
 
         if not os.path.exists(TEX_AUXILIARY):
@@ -33,7 +33,8 @@ class Tex:
         args = ['dvisvgm', '-n', f'{TEX_OUTPUT}/{self.name}.dvi']
         sp.run(args)
 
-        self.clean()
+        if cleanup:
+            self.clean()
 
     def _contentToTex(self):
         """
@@ -47,7 +48,7 @@ class Tex:
 
     def clean(self, svg=False):
         """
-        cleans up the files that are created after calling writeSvg
+        cleans up the files that are created after calling write
         """
         args = [
             'rm',
