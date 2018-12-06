@@ -1,7 +1,8 @@
 import subprocess as sp
 import os
 from hashlib import sha256
-from .constants import TEMPLATE_FILE, TEX_OUTPUT, TEX_AUXILIARY
+import lxml.etree as ET
+from .constants import TEMPLATE_FILE, TEX_OUTPUT, TEX_AUXILIARY, TEX_SVG_OUTPUT
 
 class Tex:
     """
@@ -14,14 +15,40 @@ class Tex:
         hashObj = sha256()
         hashObj.update(content.encode('utf-8'))
         self.name = hashObj.hexdigest()
+        self.path_to_svg = f'{TEX_SVG_OUTPUT}/{self.name}.svg'
+
+    def getNode(self):
+        """
+        None -> ET.Element
+        this only works if you wrote the file already
+        """
+        if not os.path.isfile(self.path_to_svg):
+            self.write()
+        return ET.parse(self.path_to_svg)
+
+    def getFile(self):
+        """
+        None -> stream
+        this only works if you wrote the file already
+        """
+        res = 0
+        if os.path.isfile(self.path_to_svg):
+            res = open(self.path_to_svg, 'r')
+        return res
+
 
     def write(self, cleanup=True):
+        """
+        writes contents to svg file
+        """
         self._contentToTex()
 
         if not os.path.exists(TEX_AUXILIARY):
             os.mkdir(TEX_AUXILIARY)
         if not os.path.exists(TEX_OUTPUT):
             os.mkdir(TEX_OUTPUT)
+        if not os.path.exists(TEX_SVG_OUTPUT):
+            os.mkdir(TEX_SVG_OUTPUT)
 
         args = [
             'latex',
@@ -30,8 +57,13 @@ class Tex:
             f'{self.name}.tex']
         sp.run(args)
 
-        args = ['dvisvgm', '-n', f'{TEX_OUTPUT}/{self.name}.dvi']
+        args = [
+            'dvisvgm',
+            '-n',
+            f'{TEX_OUTPUT}/{self.name}.dvi']
         sp.run(args)
+
+        os.rename(f'{self.name}.svg', f'{TEX_SVG_OUTPUT}/{self.name}.svg')
 
         if cleanup:
             self.clean()
@@ -59,6 +91,6 @@ class Tex:
         ]
 
         if svg:
-            args.append(f'{self.name}.svg')
+            args.append(f'{TEX_SVG_OUTPUT}/{self.name}.svg')
 
         sp.run(args)

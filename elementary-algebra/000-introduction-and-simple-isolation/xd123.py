@@ -8,5 +8,8 @@ import typesetting.Animator as tAnimator
 t = Template()
 t.write()
 
-q = Quote('Two things that are equal to a third are equal to each other.', 'Euclid')
-# q.write()
+quote_text = 'Two things that are equal to a thrid are equal to each other'
+author = 'Euclid'
+
+q = Quote(quote_text, author=author)
+print(q.getNode())

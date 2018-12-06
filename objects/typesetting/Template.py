@@ -10,6 +10,7 @@ class Template:
         res.append(r'\documentclass[{FONT_SIZE}]{article}')
 
         body = [
+            r'\usepackage[margin=1in]{geometry}',
             r'\begin{document}',
             r'\end{document}'
         ]
