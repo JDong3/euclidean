@@ -1,6 +1,6 @@
 import numpy as np
 
-class Gen:
+class Easings:
     """
     class responseble for generating paths for animations
     """
@@ -15,12 +15,13 @@ class Gen:
         :param end: the ending point of the sequence
         :param size: the size of the sequence generated
         :param [r]: flag for rounding elements in the sequence to the nearest
-        :return: a ndarray list that represents the result of
-        whole number
+        :return: an ndarray list that represents the generated sequence
         """
         dx = end - start
         x = lambda i: start + (i*dx)/(size-1)
-        res = np.ndarray([x[i] for i in range(size)])
+
+        arr = [x(i) for i in range(size)]
+        res = np.array(arr)
 
         if r:
             res = np.round(res)

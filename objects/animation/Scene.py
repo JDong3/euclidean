@@ -1,6 +1,6 @@
 import os
 import subprocess as sp
-import styles
+from .styles import RESOLUTION
 from glob import glob
 
 class Scene:
@@ -57,7 +57,7 @@ class Scene:
     @staticmethod
     def fromNodeList(lst):
         for i, element in enumerate(lst):
-            frame = Frame(styles.resolution)
+            frame = Frame(RESOLUTION)
             frame.add(lst[i])
             lst[i] = frame
 

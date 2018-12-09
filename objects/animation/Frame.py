@@ -1,8 +1,8 @@
 import lxml.etree as ET
-import styles
+from .styles import RESOLUTION
 
 class Frame:
-    def __init__(self, resolution=styles.resolution):
+    def __init__(self, resolution=RESOLUTION):
         """
         dict -> None
         :param resolution: a dictionary specifying the resolution of the frame
