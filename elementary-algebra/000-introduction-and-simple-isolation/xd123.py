@@ -8,11 +8,9 @@ import typesetting.Animator as tAnimator
 t = Template()
 t.write()
 
-quote_text = 'Two things that are equal to a thrid are equal to each other'
+quote_text = 'Two things that are equal to a third are equal to each other'
 author = 'Euclid'
 
-q = Quote(quote_text, author=author)
-lst = tAnimator.fade(q, 10)
-for l in lst:
-    root = l.getroot()
-    print(root.items())
+q = Quote(quote_text, author=author, fill='#ffffff')
+s = tAnimator.fade(q, 80)
+s.writeVideo('video', clean=False)

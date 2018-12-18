@@ -6,6 +6,7 @@ QUOTE_FONT_SIZE = 60
 TEX_OUTPUT = 'out-dir'
 TEX_AUXILIARY = 'aux-dir'
 TEX_SVG_OUTPUT = 'tex-svg-stuff'
+DEFAULT_FILL = '#ffffff'
 
 DISPLAY = 'displaystyle'
 PACKAGES = ['anyfontsize']

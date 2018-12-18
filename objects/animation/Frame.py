@@ -2,12 +2,13 @@ import lxml.etree as ET
 from .styles import RESOLUTION
 
 class Frame:
-    def __init__(self, resolution=RESOLUTION):
+    def __init__(self, node, resolution=RESOLUTION):
         """
         dict -> None
         :param resolution: a dictionary specifying the resolution of the frame
         """
         self._root = ET.Element('svg', resolution)
+        self.add(node)
         self.width = int(resolution['width'])
         self.height = int(resolution['height'])
 
@@ -27,7 +28,3 @@ class Frame:
         tree = ET.ElementTree(self._root)
         with open(file, mode) as f:
             tree.write(open(file, mode))
-
-    @staticmethod
-    def fade(frame) -> list:
-        return None

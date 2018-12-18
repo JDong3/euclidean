@@ -1,15 +1,15 @@
 from .Tex import Tex
-from .constants import QUOTE_FONT_SIZE
+from .constants import QUOTE_FONT_SIZE, DEFAULT_FILL
 
 class Quote(Tex):
     """
     class that represents a quote
     """
-    def __init__(self, quote, author='', font_size=QUOTE_FONT_SIZE):
+    def __init__(self, quote, author='', font_size=QUOTE_FONT_SIZE, fill=DEFAULT_FILL):
         self.quote = quote
         self.author = author
         self.format = self._format()
-        super().__init__(self.format)
+        super().__init__(self.format, fill=fill)
 
     def _format(self):
         quote_size = QUOTE_FONT_SIZE
