@@ -1,5 +1,5 @@
-STD_WIDTH = 1920
-STD_HEIGHT = 1080
+STD_WIDTH = round(1920/3)
+STD_HEIGHT = round(1080/3)
 
 RESOLUTION = {
     'width': str(STD_WIDTH),

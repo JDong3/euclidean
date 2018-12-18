@@ -1,6 +1,7 @@
 import os
 import subprocess as sp
 from .styles import RESOLUTION
+from .constants import DEFAULT_BACKGROUND
 from glob import glob
 
 class Scene:
@@ -10,12 +11,15 @@ class Scene:
         """
         self._frames = frames
 
-    def add(self, frame):
+    def addFrame(self, frame):
         """
         Frame -> None
         :param frame: a frame in the scene
         """
         self._frames.append(frame)
+
+    def addScene(self, scene):
+        self._frames.extend(scene._frames)
 
     def writeSvgs(self, directory):
         if not os.path.exists(directory):
@@ -29,7 +33,7 @@ class Scene:
                 'inkscape',
                 '-z', f'{directory}/{i:07}.svg',
                 '-e', f'{directory}/{i:07}.png',
-                '-b', '#000000'
+                '-b', DEFAULT_BACKGROUND
             ]
             sp.run(args)
 
@@ -62,12 +66,12 @@ class Scene:
     def fromNodeList(lst):
         for i, element in enumerate(lst):
             frame = Frame(RESOLUTION)
-            frame.add(lst[i])
+            frame.addFrame(lst[i])
             lst[i] = frame
 
         scene = Scene()
         for i, frame in enumerate(lst):
-            scene.add(frame)
+            scene.addFrame(frame)
         return scene
 
 # convert *.svg out_%05d.png

@@ -6,10 +6,15 @@ import animation.Scene as Scene
 
 class Animator:
     @staticmethod
-    def fade(tex, frame_count, easing=Easings.linear):
+    def fade(tex, frame_count, easing=Easings.linear, reverse=False):
         res = []
         node = tex.node
-        opacities = easing(0, 1, frame_count)
+
+        if reverse:
+            opacities = easing(1, 0, frame_count)
+        else:
+            opacities = easing(0, 1, frame_count)
+
         for opacity in opacities:
             t = Tex(tex.content, opacity=opacity)
             res.append(t.node)
