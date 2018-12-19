@@ -16,7 +16,7 @@ class TexWriter:
         self.name = hashObj.hexdigest()
         self.path_to_svg = f'{TEX_SVG_OUTPUT}/{self.name}.svg'
 
-    def write(self, cleanup=True):
+    def write(self, clean=True):
         """
         writes contents to svg file
         """
@@ -36,6 +36,9 @@ class TexWriter:
             f'{self.name}.tex']
         sp.run(args)
 
+        with open(f'{self.name}.tex', 'r') as f:
+            print(f.read())
+
         args = [
             'dvisvgm',
             '-n',
@@ -44,7 +47,7 @@ class TexWriter:
 
         os.rename(f'{self.name}.svg', f'{TEX_SVG_OUTPUT}/{self.name}.svg')
 
-        if cleanup:
+        if clean:
             self.clean()
 
     def _contentToTex(self):

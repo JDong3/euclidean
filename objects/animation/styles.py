@@ -1,5 +1,4 @@
-STD_WIDTH = round(1920/3)
-STD_HEIGHT = round(1080/3)
+from .constants import STD_WIDTH, STD_HEIGHT
 
 RESOLUTION = {
     'width': str(STD_WIDTH),

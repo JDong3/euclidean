@@ -16,9 +16,20 @@ class Animator:
             opacities = easing(0, 1, frame_count)
 
         for opacity in opacities:
-            t = Tex(tex.content, opacity=opacity)
+            t = copy.copy(tex)
+            t._setOpacity(opacity)
             res.append(t.node)
 
         res = [Frame(x) for x in res]
+        res = Scene(res)
+        return res
+
+    @staticmethod
+    def hold(tex, frame_count):
+        res = []
+        for i in range(frame_count):
+            t = copy.copy(tex)
+            f = Frame(t.node)
+            res.append(f)
         res = Scene(res)
         return res

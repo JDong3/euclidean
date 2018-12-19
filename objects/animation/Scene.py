@@ -3,6 +3,9 @@ import subprocess as sp
 from .styles import RESOLUTION
 from .constants import DEFAULT_BACKGROUND
 from glob import glob
+import multiprocessing as mp
+
+NUM_PROCESSES = 6
 
 class Scene:
     def __init__(self, frames=[]):
@@ -28,6 +31,8 @@ class Scene:
             frame.write(f'{directory}/{i:07}.svg')
 
     def svgsToPngs(self, directory):
+        argss = []
+        pool = mp.Pool(processes=NUM_PROCESSES)
         for i in range(len(self._frames)):
             args = [
                 'inkscape',
@@ -35,7 +40,10 @@ class Scene:
                 '-e', f'{directory}/{i:07}.png',
                 '-b', DEFAULT_BACKGROUND
             ]
-            sp.run(args)
+            argss.append(args)
+        pool.map_async(sp.run, argss)
+        pool.close()
+        pool.join()
 
     def writeVideo(self, directory, clean=True):
         self.writeSvgs(directory)
