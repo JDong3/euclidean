@@ -8,7 +8,7 @@ class Template:
 
     def write(self, name=TEMPLATE_FILE):
         res = []
-        res.append(r'\documentclass[{FONT_SIZE}]{article}')
+        res.append(rf'\documentclass[{{{FONT_SIZE}}}]{{article}}')
 
         body = [
             r'\usepackage[margin=1in]{geometry}',

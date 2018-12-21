@@ -16,8 +16,7 @@ class Animator:
             opacities = easing(0, 1, frame_count)
 
         for opacity in opacities:
-            t = copy.copy(tex)
-            t._setOpacity(opacity)
+            t = tex.partialCopy(opacity=opacity)
             res.append(t.node)
 
         res = [Frame(x) for x in res]

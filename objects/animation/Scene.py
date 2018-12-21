@@ -45,7 +45,7 @@ class Scene:
         pool.close()
         pool.join()
 
-    def writeVideo(self, directory, clean=True):
+    def writeVideo(self, directory, file, clean=True):
         self.writeSvgs(directory)
         self.svgsToPngs(directory)
 
@@ -57,7 +57,7 @@ class Scene:
             f'{directory}/%07d.png',
             '-pix_fmt',
             'yuv420p',
-            f'{directory}/out.mp4'
+            f'{directory}/{file}.mp4'
         ]
         sp.run(args)
 

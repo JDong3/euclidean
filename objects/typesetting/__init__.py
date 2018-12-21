@@ -4,3 +4,4 @@ from .Tex import Tex
 from .Template import Template
 from .Animator import Animator
 from .TexWriter import TexWriter
+from .Title import Title

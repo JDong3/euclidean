@@ -37,6 +37,15 @@ class Tex:
         return Tex(self.content, self.opacity, self.fill, self.transform,
                    self.cache)
 
+    def partialCopy(self, content=None, opacity=None, fill=None, transform=None,
+                    cache=None):
+        content = content or self.content
+        opacity = opacity or self.opacity
+        fill = fill or self.fill
+        transform = transform or self.transform
+        cache = cache or self.cache
+        return Tex(content, opacity, fill, transform, cache)
+
     def _getGroups(self):
         ns = {
             'svg': 'http://www.w3.org/2000/svg'

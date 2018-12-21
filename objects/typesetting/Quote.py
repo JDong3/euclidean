@@ -1,5 +1,5 @@
 from .Tex import Tex
-from .constants import QUOTE_FONT_SIZE, DEFAULT_FILL
+from .constants import QUOTE_FONT_SIZE, DEFAULT_FILL, SPACING_SIZE
 
 class Quote(Tex):
     """
@@ -15,11 +15,11 @@ class Quote(Tex):
 
     def _format(self):
         quote_size = QUOTE_FONT_SIZE
-        quote_spacing = QUOTE_FONT_SIZE * 1.2
-
-        res = ''
-        res += r'\noindent\fontsize'
-        res += f'{{{quote_size}}}{{{round(quote_spacing)}}}'
-        res += rf'\selectfont "{self.quote}"\\'
-        res += rf'\rightline{{-{self.author}}}'
+        quote_spacing = QUOTE_FONT_SIZE * SPACING_SIZE
+        res = rf'''
+        \noindent\fontsize
+        {{{quote_size}}}{{{round(quote_spacing)}}}
+        \selectfont "{self.quote}"\\
+        \rightline{{-{self.author}}}
+        '''
         return res
