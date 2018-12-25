@@ -1,14 +1,16 @@
+from .constants import DEFAULT_FILL
+from .constants import HEADING_FONT_SIZE
+from .constants import SPACING_SIZE
+from .constants import SUBHEADING_FONT_SIZE
+from .styles import DEFAULT_TEX_STYLE
 from .Tex import Tex
-from .constants import DEFAULT_FILL, SUBHEADING_FONT_SIZE
-from .constants import HEADING_FONT_SIZE, SPACING_SIZE
 
 class Title(Tex):
-    def __init__(self, heading, subheading='', fill=DEFAULT_FILL, opacity=1, transform=''):
+    def __init__(self, heading, subheading='', style=DEFAULT_TEX_STYLE):
         self.heading = heading
         self.subheading = subheading
         self.format = self._format()
-        Tex.__init__(self, self.format, fill=fill, opacity=opacity,
-                     transform=transform)
+        Tex.__init__(self, self.format, style=style)
 
     def _format(self):
         h = HEADING_FONT_SIZE

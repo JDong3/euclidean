@@ -6,7 +6,7 @@ class Math(Tex):
         self.display = display
         self.math = math
         self.format = self._format()
-        super().__init__(self.format)
+        Tex.__init__(self, self.format)
 
     def _format(self):
         return rf'$\{self.display} {self.content}$'

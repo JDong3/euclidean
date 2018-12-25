@@ -15,11 +15,13 @@ def introQuote():
     text = 'Things which are equal to the same thing are equal to each other'
     author = 'Euclid'
 
-    quote = Quote(text, author=author,
-                        transform='scale(2) translate(85 70)')
-    res = tAnimator.fade(quote, 120)
-    hold = tAnimator.hold(quote, 120)
-    fade_out = tAnimator.fade(quote, 120, reverse=True)
+    style = {
+        'transform': 'scale(2) translate(85 70)'
+    }
+    quote = Quote(text, author=author, style=style)
+    res = tAnimator.fade(quote, 10)
+    hold = tAnimator.hold(quote, 10)
+    fade_out = tAnimator.fade(quote, 10, reverse=True)
     res.addScene(hold)
     res.addScene(fade_out)
     return res
@@ -27,11 +29,13 @@ def introQuote():
 def mainTitle():
     heading = 'Interpreting Algebra'
     subheading = 'An Introduction To Elementary Algebra'
-    title = Title(heading, subheading=subheading,
-                  transform='scale(3) translate(30 15)')
+    style = {
+        'transform': 'scale(3) translate(30 15)'
+    }
+    title = Title(heading, subheading=subheading, style=style)
 
     fade1 = tAnimator.fade(title, 20)
-    hold = tAnimator.hold(title, 200)
+    hold = tAnimator.hold(title, 20)
 
     res = Scene()
     res.addScene(fade1)
@@ -44,4 +48,4 @@ if __name__ == '__main__':
     s1 = introQuote()
     s2 = mainTitle()
     s1.addScene(s2)
-    s1.writeVideo('video', 'v')
+    s1.writeVideo('yvideo', 'maintitle')

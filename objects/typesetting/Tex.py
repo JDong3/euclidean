@@ -1,8 +1,15 @@
-import subprocess as sp
-import os
-from hashlib import sha256
+import copy
 import lxml.etree as ET
-from .constants import TEMPLATE_FILE, TEX_OUTPUT, TEX_AUXILIARY, TEX_SVG_OUTPUT, DEFAULT_FILL
+import os
+import subprocess as sp
+from hashlib import sha256
+
+from .constants import DEFAULT_FILL
+from .constants import TEMPLATE_FILE
+from .constants import TEX_AUXILIARY
+from .constants import TEX_OUTPUT
+from .constants import TEX_SVG_OUTPUT
+from .styles import DEFAULT_TEX_STYLE
 from .TexWriter import TexWriter
 
 OPACITY = 'opacity'
@@ -11,12 +18,10 @@ TRANSFORM = 'transform'
 
 class Tex:
     """
-    class for handling objects that need to be typeset in tex
+    class for handling objects that need to be typeset in TeX
     """
 
-    def __init__(self, content, opacity=1, fill=DEFAULT_FILL, transform='',
-                 cache=True):
-
+    def __init__(self, content, style=DEFAULT_TEX_STYLE, cache=True):
         self.content = content
         hashObj = sha256()
         hashObj.update(content.encode('utf-8'))
@@ -25,26 +30,20 @@ class Tex:
         self.writer = TexWriter(content)
 
         self.node = self._getNode(cache)
-        self.opacity = opacity
-        self.fill = fill
-        self.transform = transform
+        self._style = {**DEFAULT_TEX_STYLE, **style}
         self.cache = cache
-        self._setOpacity(opacity)
-        self._setFill(fill)
-        self._setTransform(transform)
+        self._setOpacity(self._style['opacity'])
+        self._setFill(self._style['fill'])
+        self._setTransform(self._style['transform'])
 
     def __copy__(self):
-        return Tex(self.content, self.opacity, self.fill, self.transform,
-                   self.cache)
+        style_copy = copy.deepcopy(self._style)
+        return Tex(self.content, style_copy, self.cache)
 
-    def partialCopy(self, content=None, opacity=None, fill=None, transform=None,
-                    cache=None):
+    def partialCopy(self, content=None, style={}):
         content = content or self.content
-        opacity = opacity or self.opacity
-        fill = fill or self.fill
-        transform = transform or self.transform
-        cache = cache or self.cache
-        return Tex(content, opacity, fill, transform, cache)
+        new_style = {**self._style, **style}
+        return Tex(content, new_style)
 
     def _getGroups(self):
         ns = {
