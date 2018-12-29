@@ -6,13 +6,15 @@ from .styles import DEFAULT_TEX_STYLE
 from .Tex import Tex
 
 class Title(Tex):
-    def __init__(self, heading, subheading='', style=DEFAULT_TEX_STYLE):
+    def __init__(self, heading, subheading='', style=DEFAULT_TEX_STYLE, position=None):
         self.heading = heading
         self.subheading = subheading
-        self.format = self._format()
-        Tex.__init__(self, self.format, style=style)
+        self.content = Title.makeContent(heading, subheading)
+        self.style = style
+        Tex.__init__(self, self.content, style=self.style, position=position)
 
-    def _format(self):
+    @staticmethod
+    def makeContent(heading, subheading):
         h = HEADING_FONT_SIZE
         hs = round(HEADING_FONT_SIZE * SPACING_SIZE)
         s = SUBHEADING_FONT_SIZE
@@ -22,13 +24,13 @@ class Title(Tex):
         \noindent\begin{{center}}
             \textbf{{
                 \fontsize{{{h}}}{{{hs}}}\selectfont
-                {self.heading}
+                {heading}
             }}
             \\
             \bigskip
             {{
                 \fontsize{{{s}}}{{{ss}}}\selectfont
-                {self.subheading}
+                {subheading}
             }}
         \end{{center}}
         '''

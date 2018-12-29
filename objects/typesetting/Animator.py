@@ -20,18 +20,18 @@ class Animator:
                 'opacity': opacity
             }
             t = tex.partialCopy(style=style)
-            res.append(t.node)
+            res.append(t.frame)
 
-        res = [Frame(x) for x in res]
         res = Scene(res)
         return res
 
     @staticmethod
     def hold(tex, frame_count):
         res = []
+
         for i in range(frame_count):
             t = copy.copy(tex)
-            f = Frame(t.node)
-            res.append(f)
+            res.append(t.frame)
+
         res = Scene(res)
         return res

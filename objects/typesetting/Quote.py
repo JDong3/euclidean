@@ -9,23 +9,20 @@ class Quote(Tex):
     class that represents a quote
     """
     def __init__(self, quote, author=UNKNOWN_AUTHOR, font_size=QUOTE_FONT_SIZE,
-                 style=DEFAULT_TEX_STYLE, cache=True):
+                 style=DEFAULT_TEX_STYLE, position=None, cache=True):
         self.quote = quote
         self.author = author
+        self.content = Quote.makeContent(self.quote, self.author)
+        Tex.__init__(self, self.content, style, position)
 
-        self.format = self._format()
-        self._style = style
-
-        Tex.__init__(self, self.format, self._style)
-
-
-    def _format(self):
+    @staticmethod
+    def makeContent(quote, author):
         quote_size = QUOTE_FONT_SIZE
         quote_spacing = QUOTE_FONT_SIZE * SPACING_SIZE
         res = rf'''
-        \noindent\fontsize
-        {{{quote_size}}}{{{round(quote_spacing)}}}
-        \selectfont "{self.quote}"\\
-        \rightline{{-{self.author}}}
+            \noindent\fontsize
+            {{{quote_size}}}{{{round(quote_spacing)}}}
+            \selectfont "{quote}"\\
+            \rightline{{-{author}}}
         '''
         return res

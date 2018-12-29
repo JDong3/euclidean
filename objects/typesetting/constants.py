@@ -13,3 +13,7 @@ DEFAULT_FILL = '#ffffff'
 
 DISPLAY = 'displaystyle'
 PACKAGES = ['anyfontsize']
+
+STD_TEX_NS = {
+    'svg': 'http://www.w3.org/2000/svg'
+}

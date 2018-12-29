@@ -5,8 +5,9 @@ class Math(Tex):
     def __init__(self, math, display=DISPLAY):
         self.display = display
         self.math = math
-        self.format = self._format()
-        Tex.__init__(self, self.format)
+        self.content = Math.makeContent()
+        Tex.__init__(self, self.content)
 
-    def _format(self):
+    @staticmethod
+    def makeContent(self):
         return rf'$\{self.display} {self.content}$'
