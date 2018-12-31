@@ -5,15 +5,21 @@ from .Tex import Tex
 UNKNOWN_AUTHOR = 'Unknown'
 
 class Quote(Tex):
-    """
-    class that represents a quote
-    """
-    def __init__(self, quote, author=UNKNOWN_AUTHOR, font_size=QUOTE_FONT_SIZE,
-                 style=DEFAULT_TEX_STYLE, position=None, cache=True):
-        self.quote = quote
-        self.author = author
-        self.content = Quote.makeContent(self.quote, self.author)
-        Tex.__init__(self, self.content, style, position)
+
+    def __init__(self, config):
+        """
+        :param config:
+
+        :config quote:
+        :config author:
+        :config font_size:
+        """
+        author = config['author']
+        quote = config['quote']
+        content = Quote.makeContent(quote, author)
+
+        config['content'] = content
+        Tex.__init__(self, config)
 
     @staticmethod
     def makeContent(quote, author):

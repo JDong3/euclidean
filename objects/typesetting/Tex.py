@@ -23,41 +23,40 @@ class Tex(Frameable):
     parent class for handling all objects that need to be typeset in TeX
     """
 
-    def __init__(self, content, style=None, position=None, cache=True):
+    def __init__(self, config):
         """
-        str, [dict], [bool] -> None
+        dict -> None
 
-        :param content: a string that represents a the content you want to
+        :param config: dictionary that represents the configuration of the
+        object
+
+        :config content: a string that represents a the content you want to
         typeset, 'content' must be a valid string in the document environment
         of a TeX document
-        :param [style]: a dictionary of modifications you want to make to the
+        :config [style]: a dictionary of modifications you want to make to the
         style of the content you want to typeset, see the default style for
         hints on how to use this
-        :param [cache]: whether you want to use the cached svg file for this
+        :config [size]: the size in px of the svg in form '(width, height)'
+        :config [cache]: whether you want to use the cached svg file for this
         object if one is available, if you choose not to use the cached one it
         will be overwritten during the creation of this object anyways
         """
-        self.content = Tex.makeContent(content)
+        self.config = config
+        self.content = Tex.makeContent(config['content'])
         self.name = Tex.makeName(self.content)
         self.path = Tex.makePath(self.name)
 
-        self.style = Tex.makeStyle(style)
-        self.position = position
-        self.node = Tex.makeNode(self.content, self.name, self.path,
-                                 self.style, self.position, cache)
+        self.style = Tex.makeStyle(config['style'])
+        self.size = config['size']
+        self.node = Tex.makeNode(self.content, self.style, self.size)
 
         Frameable.__init__(self, self.node)
 
     @staticmethod
-    def getGroups(node):
-        return node.findall('./svg:g', namespaces=STD_TEX_NS)
-
-    @staticmethod
-    def getUses(node):
-        return node.findall('./svg:g/svg:use', namespaces=STD_TEX_NS)
-
-    @staticmethod
     def applyPosition(node, position):
+        '''
+        :deprecated:
+        '''
         uses = Tex.getUses(node)
 
         for use in uses:
@@ -74,21 +73,53 @@ class Tex(Frameable):
         node.set('viewBox', viewbox)
 
     @staticmethod
+    def applySize(node, size):
+        aspect_ratio = size[0] / size[1]
+        old_size = [node.get('width'), node.get('height')]
+
+        for i, dim in enumerate(old_size):
+            res = dim[:-2]
+            res = float(res)
+            old_size[i] = res
+        old_aspect_ratio = old_size[0] / old_size[1]
+
+        # if new ratio is larger than older ratio then our desired picture is wider than the available screen
+        if aspect_ratio > old_aspect_ratio:
+            scale = size[1]/old_size[1]
+        else:
+            scale = size[0]/old_size[0]
+
+        new_size = [str(x * scale) for x in old_size]
+        node.set('width', new_size[0])
+        node.set('height', new_size[1])
+
+    @staticmethod
     def applyStyle(node, style):
         for group in Tex.getGroups(node):
             for key in style:
                 group.set(key, str(style[key]))
 
     @staticmethod
+    def getGroups(node):
+        return node.findall('./svg:g', namespaces=STD_TEX_NS)
+
+    @staticmethod
+    def getUses(node):
+        return node.findall('./svg:g/svg:use', namespaces=STD_TEX_NS)
+
+    @staticmethod
     def makeStyle(s):
         return s and {**DEFAULT_TEX_STYLE, **s}
 
     @staticmethod
-    def makeNode(content, name, path, style, position, cache):
+    def makeNode(content, style, size, cache=True):
         """
         None -> ET.Element
         this only works if you wrote the file already
         """
+        name = Tex.makeName(content)
+        path = Tex.makePath(name)
+
         if not os.path.isfile(path) or not cache:
             writer = TexWriter(content)
             writer.write(clean=True)
@@ -97,14 +128,14 @@ class Tex(Frameable):
         if style:
             Tex.applyStyle(res, style)
 
-        if position:
-            Tex.applyPosition(res, position)
+        if size:
+            Tex.applySize(res, size)
+
+        # deprecated, use translate
+        # if position:
+        #     Tex.applyPosition(res, position)
 
         return res
-
-    @staticmethod
-    def makePath(name):
-        return f'{TEX_SVG_OUTPUT}/{name}.svg'
 
     @staticmethod
     def makeContent(content):
@@ -117,6 +148,9 @@ class Tex(Frameable):
         res = hashObj.hexdigest()
         return res
 
+    @staticmethod
+    def makePath(name):
+        return f'{TEX_SVG_OUTPUT}/{name}.svg'
 
     def __copy__(self):
         """
@@ -125,17 +159,18 @@ class Tex(Frameable):
         None -> Tex
         :returns: copied Tex object
         """
-        style_copy = copy.deepcopy(self.style)
-        return Tex(self.content, style=style_copy, position=self.position)
+        config_copy = copy.deepcopy(self.config)
+        return Tex(config_copy)
 
-    def partialCopy(self, content=None, position=None, style={}):
+    def partialCopy(self, config):
         """
         allows you to copy the current tex object while making some
         modifications
 
-        [str], [dict], [bool] -> Tex
+        [str], [dict], [list] -> Tex
         """
-        content = content or self.content
-        position= position or self.position
-        new_style = {**self.style, **style}
-        return Tex(content, style=new_style, position=position)
+        if config:
+            config = {**self.config, **config}
+        else:
+            config = self.config
+        return Tex(config)

@@ -16,10 +16,12 @@ class Animator:
             opacities = easing(0, 1, frame_count)
 
         for opacity in opacities:
-            style={
-                'opacity': opacity
+            config = {
+                'style': {
+                    'opacity': opacity
+                }
             }
-            t = tex.partialCopy(style=style)
+            t = tex.partialCopy(config)
             res.append(t.frame)
 
         res = Scene(res)

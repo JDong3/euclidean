@@ -6,12 +6,17 @@ from .styles import DEFAULT_TEX_STYLE
 from .Tex import Tex
 
 class Title(Tex):
-    def __init__(self, heading, subheading='', style=DEFAULT_TEX_STYLE, position=None):
-        self.heading = heading
-        self.subheading = subheading
-        self.content = Title.makeContent(heading, subheading)
-        self.style = style
-        Tex.__init__(self, self.content, style=self.style, position=position)
+    def __init__(self, config):
+        """
+        :param config:
+
+        :config heading:
+        :config subheading:
+        """
+        heading, subheading = config['heading'], config['subheading']
+        content = Title.makeContent(heading, subheading)
+        config['content'] = content
+        Tex.__init__(self, config)
 
     @staticmethod
     def makeContent(heading, subheading):
@@ -23,7 +28,7 @@ class Title(Tex):
         res = rf'''
         \noindent\begin{{center}}
             \textbf{{
-                \fontsize{{{h}}}{{{hs}}}\selectfont
+            \fontsize{{{h}}}{{{hs}}}\selectfont
                 {heading}
             }}
             \\

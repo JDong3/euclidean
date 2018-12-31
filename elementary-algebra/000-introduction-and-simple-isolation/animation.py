@@ -15,30 +15,37 @@ def genTemplate():
     template.write()
 
 def introQuote():
-    text = 'Things which are equal to the same thing are equal to each other'
-    author = 'Euclid'
-
-    style = {
-        'transform': 'scale(2)'
+    config = {
+        'quote': 'Things which are equal to the same thing are equal to each other',
+        'author': 'Euclid',
+        'style' : {
+            'transform': '',
+            'fill': '#ffffff'
+        },
+        'size': (1920, 1080)
     }
-    position = (170, 140)
-    quote = Quote(text, author=author, style=style, position=position)
-    res = tAnimator.fade(quote, 10)
-    hold = tAnimator.hold(quote, 10)
-    fade_out = tAnimator.fade(quote, 10, reverse=True)
+    quote = Quote(config)
+    res = tAnimator.fade(quote, 100)
+    hold = tAnimator.hold(quote, 100)
+    fade_out = tAnimator.fade(quote, 100, reverse=True)
     res.addScene(hold)
     res.addScene(fade_out)
+
     return res
 
 def mainTitle():
-    heading = 'Interpreting Algebra'
-    subheading = 'An Introduction To Elementary Algebra'
-    style = {
-        'transform': 'scale(3)'
+
+    config = {
+        'heading': 'Interpreting Algebra',
+        'subheading': 'An Introduction To Elementary Algebra',
+        'style': {
+            'transform': 'translate(90 45)',
+            'fill': '#ffffff'
+        },
+        'size': (1920, 1080)
     }
-    position = (90, 45)
-    title = Title(heading, subheading=subheading, style=style,
-                  position=position)
+
+    title = Title(config)
 
     fade1 = tAnimator.fade(title, 20)
     hold = tAnimator.hold(title, 20)
@@ -54,13 +61,9 @@ def sampleLabel():
     f.write('sampleLabel.svg')
 
 if __name__ == '__main__':
-    genTemplate()
+    # genTemplate()
 
     s1 = introQuote()
-    s2 = mainTitle()
-    s1.addScene(s2)
-    s1.writeVideo('video', 'maintitle5', clean=False)
-
-    # sampleLabel()
-    # t = Tex('abc')
-    # print(Tex.getGroups(t.node))
+    # s2 = mainTitle()
+    # s1.addScene(s2)
+    s1.writeVideo('video', 'bug2')

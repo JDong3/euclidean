@@ -1,3 +1,5 @@
+
+
 STD_COLOR = '#A3E4D7'
 TEMPLATE_FILE = 'template.tex'
 FONT_SIZE = 20
