@@ -4,6 +4,7 @@ import os
 import subprocess as sp
 from hashlib import sha256
 
+from . import tatr
 from animation.Frameable import Frameable
 from .constants import DEFAULT_FILL
 from .constants import TEMPLATE_FILE
@@ -13,10 +14,6 @@ from .constants import TEX_OUTPUT
 from .constants import TEX_SVG_OUTPUT
 from .styles import DEFAULT_TEX_STYLE
 from .TexWriter import TexWriter
-
-OPACITY = 'opacity'
-FILL = 'fill'
-TRANSFORM = 'transform'
 
 class Tex(Frameable):
     """
@@ -41,13 +38,13 @@ class Tex(Frameable):
         object if one is available, if you choose not to use the cached one it
         will be overwritten during the creation of this object anyways
         """
-        self.config = config
-        self.content = Tex.makeContent(config['content'])
+        self.config = Tex.makeConfig(config)
+        self.content = Tex.makeContent(config[tatr.content])
         self.name = Tex.makeName(self.content)
         self.path = Tex.makePath(self.name)
 
-        self.style = Tex.makeStyle(config['style'])
-        self.size = config['size']
+        self.style = Tex.makeStyle(config[tatr.style])
+        self.size = config[tatr.size]
         self.node = Tex.makeNode(self.content, self.style, self.size)
 
         Frameable.__init__(self, self.node)
@@ -140,6 +137,12 @@ class Tex(Frameable):
     @staticmethod
     def makeContent(content):
         return '\\pagenumbering{gobble}\n' + content
+
+    @staticmethod
+    def makeConfig(config):
+        res = copy.deepcopy(config)
+        res = {**tatr.default, **config}
+        return res
 
     @staticmethod
     def makeName(content):

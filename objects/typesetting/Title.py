@@ -1,3 +1,4 @@
+from . import tatr
 from .constants import DEFAULT_FILL
 from .constants import HEADING_FONT_SIZE
 from .constants import SPACING_SIZE
@@ -13,9 +14,9 @@ class Title(Tex):
         :config heading:
         :config subheading:
         """
-        heading, subheading = config['heading'], config['subheading']
+        heading, subheading = config[tatr.heading], config[tatr.subheading]
         content = Title.makeContent(heading, subheading)
-        config['content'] = content
+        config[tatr.content] = content
         Tex.__init__(self, config)
 
     @staticmethod

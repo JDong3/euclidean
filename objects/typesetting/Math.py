@@ -1,13 +1,14 @@
 from .constants import DISPLAY
 from .Tex import Tex
+from . import tatr
 
 class Math(Tex):
-    def __init__(self, math, display=DISPLAY):
-        self.display = display
-        self.math = math
-        self.content = Math.makeContent()
-        Tex.__init__(self, self.content)
+    def __init__(self, {config}):
+
+        math = config[tatr.math]
+        config[tatr.content] = Math.makeContent(math)
+        Tex.__init__(config)
 
     @staticmethod
-    def makeContent(self):
-        return rf'$\{self.display} {self.content}$'
+    def makeContent(math):
+        return rf'$\displaystyle {math}$'

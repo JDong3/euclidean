@@ -1,10 +1,10 @@
 import copy
 import numpy as np
 
-from .Tex import Tex
-from .styles import DEFAULT_TEX_STYLE
+from . import tatr
 from .constants import STD_TEX_NS
-
+from .styles import DEFAULT_TEX_STYLE
+from .Tex import Tex
 
 # TODO: new api, label(degree(radians), distance), position moved to tex
 
@@ -26,10 +26,10 @@ class Label(Tex):
         """
         config = copy.deepcopy(config)
 
-        radian = config['radian']
-        position = config['position']
-        distance = config['distance']
-        config['position'] = Label.makePosition(radian, position, distance)
+        radian = config[tatr.radian]
+        position = config[tatr.position]
+        distance = config[tatr.distance]
+        config[tatr.position] = Label.makePosition(radian, position, distance)
         Tex.__init__(self, config)
         # Label.setPositions(self.node, self.x, self.y)
 

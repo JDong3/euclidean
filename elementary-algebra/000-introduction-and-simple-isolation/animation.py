@@ -63,7 +63,9 @@ def sampleLabel():
 if __name__ == '__main__':
     # genTemplate()
 
-    s1 = introQuote()
+    # s1 = introQuote()
     # s2 = mainTitle()
     # s1.addScene(s2)
-    s1.writeVideo('video', 'bug2')
+    # s1.writeVideo('video', 'bug2')
+
+    t = Tex({'content': 'abc'})

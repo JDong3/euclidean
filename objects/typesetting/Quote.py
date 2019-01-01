@@ -1,4 +1,7 @@
-from .constants import QUOTE_FONT_SIZE, DEFAULT_FILL, SPACING_SIZE
+from . import tatr
+from .constatns import DEFAULT_FILL
+from .constants import QUOTE_FONT_SIZE
+from .constants import SPACING_SIZE
 from .styles import DEFAULT_TEX_STYLE
 from .Tex import Tex
 
@@ -14,11 +17,11 @@ class Quote(Tex):
         :config author:
         :config font_size:
         """
-        author = config['author']
-        quote = config['quote']
+        author = config[tatr.author]
+        quote = config[tatr.quote]
         content = Quote.makeContent(quote, author)
 
-        config['content'] = content
+        config[tatr.content] = content
         Tex.__init__(self, config)
 
     @staticmethod
