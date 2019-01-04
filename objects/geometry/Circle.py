@@ -1,6 +1,6 @@
 import lxml.etree as ET
-import styles
-from Line import Line
+from .Line import Line
+from . import styles
 
 class Circle:
     def __init__(self, center, outer, style_update={}):

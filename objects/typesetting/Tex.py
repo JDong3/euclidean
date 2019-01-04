@@ -2,6 +2,7 @@ import copy
 import lxml.etree as ET
 import os
 import subprocess as sp
+import sys
 from hashlib import sha256
 
 from . import tatr
@@ -22,35 +23,45 @@ class Tex(Frameable):
 
     def __init__(self, config):
         """
+        does not mutate config
+
         dict -> None
 
         :param config: dictionary that represents the configuration of the
         object
 
-        :config content: a string that represents a the content you want to
-        typeset, 'content' must be a valid string in the document environment
-        of a TeX document
-        :config [style]: a dictionary of modifications you want to make to the
-        style of the content you want to typeset, see the default style for
-        hints on how to use this
-        :config [size]: the size in px of the svg in form '(width, height)'
         :config [cache]: whether you want to use the cached svg file for this
         object if one is available, if you choose not to use the cached one it
         will be overwritten during the creation of this object anyways
+        :config [content]: a string that represents a the content you want to
+        typeset, 'content' must be a valid string in the document environment
+        of a TeX document
+        :config [fill]:
+        :config [position]:
+        :config [size]: the size in px of the svg in form '(width, height)'
         """
+        config = copy.deepcopy(config)
+
         self.config = Tex.makeConfig(config)
-        self.content = Tex.makeContent(config[tatr.content])
-        self.name = Tex.makeName(self.content)
-        self.path = Tex.makePath(self.name)
-
-        self.style = Tex.makeStyle(config[tatr.style])
-        self.size = config[tatr.size]
-        self.node = Tex.makeNode(self.content, self.style, self.size)
-
+        node = Tex.makeNode(self.config)
         Frameable.__init__(self, self.node)
 
     @staticmethod
-    def applyPosition(node, position):
+    def applyFill(node, config):
+        group = Tex.getGroup(node)
+        fill = config[tatr.fill]
+        group.set('fill', fill)
+
+    @staticmethod
+    def applyPosition(node, config):
+        group = Tex.getGroup(node)
+        x, y = config[tatr.position]
+        transform = group.get('transform')
+        transform = f'{transform} translate({x} {y})'
+        group.set('transform', tranform)
+
+    @staticmethod
+    def applyPosition2(node, position):
         '''
         :deprecated:
         '''
@@ -70,7 +81,8 @@ class Tex(Frameable):
         node.set('viewBox', viewbox)
 
     @staticmethod
-    def applySize(node, size):
+    def applySize(node, config):
+        size = config[tatr.size]
         aspect_ratio = size[0] / size[1]
         old_size = [node.get('width'), node.get('height')]
 
@@ -91,42 +103,92 @@ class Tex(Frameable):
         node.set('height', new_size[1])
 
     @staticmethod
-    def applyStyle(node, style):
+    def applyStyle2(node, style):
+        """
+        :deprecated:
+        """
         for group in Tex.getGroups(node):
             for key in style:
                 group.set(key, str(style[key]))
+
+    @staticmethod
+    def getGroup(node):
+        return node.find('./svg:g', namespaces=STD_TEX_NS)
 
     @staticmethod
     def getGroups(node):
         return node.findall('./svg:g', namespaces=STD_TEX_NS)
 
     @staticmethod
+    def getUse(node):
+        return node.find('./svg:g/svg:use', namespaces=STD_TEX_NS)
+
+    @staticmethod
     def getUses(node):
         return node.findall('./svg:g/svg:use', namespaces=STD_TEX_NS)
 
     @staticmethod
-    def makeStyle(s):
-        return s and {**DEFAULT_TEX_STYLE, **s}
+    def makeConfig(config):
+        DEF_CACHE = True
+        DEF_CONTENT = 'no content'
+        DEF_SIZE = (sys.maxsize, 1080/4)
+        DEF_FILL = '#ffffff'
+        DEF_POSITION = (0, 0)
+
+        config = copy.deepcopy(config)
+
+        if not tatr.cache in config:
+            config[tatr.cache] = DEF_CACHE
+
+        if not tatr.content in config:
+            config[tatr.content] = DEF_CONTENT
+        config[tatr.content] = Tex.makeContent(config)
+
+        if not tatr.fill in config:
+            config[tatr.fill] = DEF_FILL
+
+        if not tatr.position in config:
+            config[tatr.position] = DEF_POSITION
+
+        if not tatr.size in config:
+            config[tatr.size] = DEF_SIZE
+
+        return res
 
     @staticmethod
-    def makeNode(content, style, size, cache=True):
+    def makeContent(config):
+        res = config[tatr.content]
+        res = '\\pagenumbering{gobble}\n' + res
+        return res
+
+    @staticmethod
+    def makeName(config):
+        content = config[tatr.content]
+        hashObj = sha256()
+        hashObj.update(content.encode('utf-8'))
+        res = hashObj.hexdigest()
+        return res
+
+    @staticmethod
+    def makeNode(config):
         """
         None -> ET.Element
         this only works if you wrote the file already
         """
-        name = Tex.makeName(content)
-        path = Tex.makePath(name)
+        content = config[tatr.content]
+        name = config[tatr.name]
+
+        name = Tex.makeName(config)
+        path = Tex.makePath(config)
 
         if not os.path.isfile(path) or not cache:
             writer = TexWriter(content)
             writer.write(clean=True)
         res = ET.parse(path).getroot()
 
-        if style:
-            Tex.applyStyle(res, style)
-
-        if size:
-            Tex.applySize(res, size)
+        Tex.applyFill(res, config)
+        Tex.applyPosition(res, config)
+        Tex.applySize(res, config)
 
         # deprecated, use translate
         # if position:
@@ -135,24 +197,8 @@ class Tex(Frameable):
         return res
 
     @staticmethod
-    def makeContent(content):
-        return '\\pagenumbering{gobble}\n' + content
-
-    @staticmethod
-    def makeConfig(config):
-        res = copy.deepcopy(config)
-        res = {**tatr.default, **config}
-        return res
-
-    @staticmethod
-    def makeName(content):
-        hashObj = sha256()
-        hashObj.update(content.encode('utf-8'))
-        res = hashObj.hexdigest()
-        return res
-
-    @staticmethod
-    def makePath(name):
+    def makePath(config):
+        name = Tex.makeName(config)
         return f'{TEX_SVG_OUTPUT}/{name}.svg'
 
     def __copy__(self):

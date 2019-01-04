@@ -1,27 +1,16 @@
+author = 'author'
+cache = 'cache'
 content = 'content'
-position = 'position'
-style = 'style'
-size = 'size'
-
+distance = 'distance'
+font_size = 'font_size'
+heading = 'heading'
 opacity = 'opacity'
+position = 'position'
+radian = 'radian'
+size = 'size'
+subheading = 'subheading'
+quote = 'quote'
+
+style = 'style'
 fill = 'fill'
 transform = 'transform'
-
-cache = 'cache'
-radian = 'radian'
-
-heading = 'heading'
-subheading = 'subheading'
-
-author = 'author'
-quote = 'quote'
-font_size = 'font_size'
-
-default = {
-    content: '',
-    position: (0, 0),
-    style: {
-        transform: '',
-        fill: '#ffffff'
-    }
-}

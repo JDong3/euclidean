@@ -3,6 +3,7 @@ sys.path.insert(0, '../../objects')
 
 import animation.Frame as Frame
 import animation.Scene as Scene
+import numpy as np
 import typesetting.Label as Label
 import typesetting.Quote as Quote
 import typesetting.Animator as tAnimator

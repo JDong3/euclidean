@@ -1,7 +1,8 @@
-from Point import Point
 import lxml.etree as ET
-import styles
 import math
+
+from .Point import Point
+from . import styles
 
 class Line:
     def __init__(self, a, b, style_update={}):

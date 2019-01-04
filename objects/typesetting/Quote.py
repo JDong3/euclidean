@@ -1,5 +1,5 @@
 from . import tatr
-from .constatns import DEFAULT_FILL
+from .constants import DEFAULT_FILL
 from .constants import QUOTE_FONT_SIZE
 from .constants import SPACING_SIZE
 from .styles import DEFAULT_TEX_STYLE

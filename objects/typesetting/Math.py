@@ -3,7 +3,7 @@ from .Tex import Tex
 from . import tatr
 
 class Math(Tex):
-    def __init__(self, {config}):
+    def __init__(self, config):
 
         math = config[tatr.math]
         config[tatr.content] = Math.makeContent(math)

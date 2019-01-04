@@ -1,4 +1,4 @@
-import styles
+from . import styles
 import lxml.etree as ET
 
 class Point:
@@ -11,6 +11,7 @@ class Point:
         """
         self.x = x
         self.y = y
+        self.position = (x, y)
         self.style = {**styles.point, **style_update}
         self.style['cx'] = str(self.x)
         self.style['cy'] = str(self.y)
