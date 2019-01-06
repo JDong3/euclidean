@@ -37,14 +37,13 @@ class Tex(Frameable):
         typeset, 'content' must be a valid string in the document environment
         of a TeX document
         :config [fill]:
+        :config [opacity]:
         :config [position]:
         :config [size]: the size in px of the svg in form '(width, height)'
         """
-        config = copy.deepcopy(config)
-
         self.config = Tex.makeConfig(config)
         node = Tex.makeNode(self.config)
-        Frameable.__init__(self, self.node)
+        Frameable.__init__(self, node)
 
     @staticmethod
     def applyFill(node, config):
@@ -53,32 +52,26 @@ class Tex(Frameable):
         group.set('fill', fill)
 
     @staticmethod
+    def applyOpacity(node, config):
+        opacity = str(config[tatr.opacity])
+        node.set('opacity', opacity)
+
+    @staticmethod
     def applyPosition(node, config):
         group = Tex.getGroup(node)
         x, y = config[tatr.position]
+
+        # this block accomodates for the viewbox in the svg that dvisvgm outputs
+        old_x, old_y = node.get('viewBox').split(' ')[-2:]
+        old_x, old_y = float(old_x), float(old_y)
+        ratio = old_x/config[tatr.size][0]
+        x, y = ratio * x, ratio * y
+
         transform = group.get('transform')
+        if transform == None:
+            transform = ''
         transform = f'{transform} translate({x} {y})'
-        group.set('transform', tranform)
-
-    @staticmethod
-    def applyPosition2(node, position):
-        '''
-        :deprecated:
-        '''
-        uses = Tex.getUses(node)
-
-        for use in uses:
-            new_x = float(use.get('x')) + position[0]
-            new_y = float(use.get('y')) + position[1]
-            use.set('x', str(new_x))
-            use.set('y', str(new_y))
-
-        viewbox = node.get('viewBox').split(' ')
-        viewbox[0] = float(viewbox[0]) + position[0]
-        viewbox[1] = float(viewbox[1]) + position[1]
-        viewbox = [str(x) for x in viewbox]
-        viewbox = ' '.join(viewbox)
-        node.set('viewBox', viewbox)
+        group.set('transform', transform)
 
     @staticmethod
     def applySize(node, config):
@@ -101,15 +94,6 @@ class Tex(Frameable):
         new_size = [str(x * scale) for x in old_size]
         node.set('width', new_size[0])
         node.set('height', new_size[1])
-
-    @staticmethod
-    def applyStyle2(node, style):
-        """
-        :deprecated:
-        """
-        for group in Tex.getGroups(node):
-            for key in style:
-                group.set(key, str(style[key]))
 
     @staticmethod
     def getGroup(node):
@@ -135,30 +119,33 @@ class Tex(Frameable):
         DEF_FILL = '#ffffff'
         DEF_POSITION = (0, 0)
 
-        config = copy.deepcopy(config)
+        res = copy.deepcopy(config)
 
-        if not tatr.cache in config:
-            config[tatr.cache] = DEF_CACHE
+        if not tatr.cache in res:
+            res[tatr.cache] = DEF_CACHE
 
-        if not tatr.content in config:
-            config[tatr.content] = DEF_CONTENT
-        config[tatr.content] = Tex.makeContent(config)
+        if not tatr.content in res:
+            res[tatr.content] = DEF_CONTENT
+        res[tatr.content] = Tex.makeContent(res)
 
-        if not tatr.fill in config:
-            config[tatr.fill] = DEF_FILL
+        if not tatr.fill in res:
+            res[tatr.fill] = DEF_FILL
 
-        if not tatr.position in config:
-            config[tatr.position] = DEF_POSITION
+        if not tatr.opacity in res:
+            res[tatr.opacity] = 1
 
-        if not tatr.size in config:
-            config[tatr.size] = DEF_SIZE
+        if not tatr.position in res:
+            res[tatr.position] = DEF_POSITION
+
+        if not tatr.size in res:
+            res[tatr.size] = DEF_SIZE
 
         return res
 
     @staticmethod
     def makeContent(config):
         res = config[tatr.content]
-        res = '\\pagenumbering{gobble}\n' + res
+        res = r'\pagenumbering{gobble}' + '\n' + res
         return res
 
     @staticmethod
@@ -175,24 +162,18 @@ class Tex(Frameable):
         None -> ET.Element
         this only works if you wrote the file already
         """
-        content = config[tatr.content]
-        name = config[tatr.name]
-
         name = Tex.makeName(config)
         path = Tex.makePath(config)
 
-        if not os.path.isfile(path) or not cache:
-            writer = TexWriter(content)
+        if not os.path.isfile(path) or not config[tatr.cache]:
+            writer = TexWriter(config[tatr.content])
             writer.write(clean=True)
         res = ET.parse(path).getroot()
 
         Tex.applyFill(res, config)
+        Tex.applyOpacity(res, config)
         Tex.applyPosition(res, config)
         Tex.applySize(res, config)
-
-        # deprecated, use translate
-        # if position:
-        #     Tex.applyPosition(res, position)
 
         return res
 

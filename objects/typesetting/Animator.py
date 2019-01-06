@@ -3,6 +3,7 @@ import animation.Easings as Easings
 import copy
 import animation.Frame as Frame
 import animation.Scene as Scene
+import typesetting.tatr as tatr
 
 def fade(tex, frame_count, easing=Easings.linear, reverse=False):
     res = []
@@ -15,9 +16,7 @@ def fade(tex, frame_count, easing=Easings.linear, reverse=False):
 
     for opacity in opacities:
         config = {
-            'style': {
-                'opacity': opacity
-            }
+            tatr.opacity: opacity
         }
         t = tex.partialCopy(config)
         res.append(t.frame)

@@ -17,12 +17,6 @@ class Label(Tex):
         :config position: the coordinates of the label
         :config distance: the distance from the position you want to start the
         label
-
-        >>> config = {
-                'radian': Pi/2,
-                'position': '(100, 150)',
-                'distance': 15
-            }
         """
         config = copy.deepcopy(config)
 
@@ -32,6 +26,10 @@ class Label(Tex):
         config[tatr.position] = Label.makePosition(radian, position, distance)
         Tex.__init__(self, config)
         # Label.setPositions(self.node, self.x, self.y)
+
+    @staticmethod
+    def makeConfig(config):
+        return None
 
     @staticmethod
     def makePosition(radian, position, distance):

@@ -1,3 +1,4 @@
+import copy
 from . import tatr
 from .constants import DEFAULT_FILL
 from .constants import HEADING_FONT_SIZE
@@ -14,13 +15,30 @@ class Title(Tex):
         :config heading:
         :config subheading:
         """
-        heading, subheading = config[tatr.heading], config[tatr.subheading]
-        content = Title.makeContent(heading, subheading)
-        config[tatr.content] = content
+        config = Title.makeConfig(config)
         Tex.__init__(self, config)
 
     @staticmethod
-    def makeContent(heading, subheading):
+    def makeConfig(config):
+        DEF_HEADING = 'no heading'
+        DEF_SUBHEADING = 'no subheading'
+
+        config = copy.deepcopy(config)
+        if not tatr.heading in config:
+            config[tatr.heading] = DEF_HEADING
+
+        if not tatr.subheading in config:
+            config[tatr.subheading] = DEF_SUBHEADING
+
+        content = Title.makeContent(config)
+        config[tatr.content] = content
+
+        return config
+
+    @staticmethod
+    def makeContent(config):
+        heading = config[tatr.heading]
+        subheading = config[tatr.subheading]
         h = HEADING_FONT_SIZE
         hs = round(HEADING_FONT_SIZE * SPACING_SIZE)
         s = SUBHEADING_FONT_SIZE

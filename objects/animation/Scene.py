@@ -45,9 +45,16 @@ class Scene:
         pool.close()
         pool.join()
 
-    def writeVideo(self, directory, file, clean=True):
+    def writeVideo(self, directory, file, clean=True, view=False):
         self.writeSvgs(directory)
         self.svgsToPngs(directory)
+
+        path = f'{directory}/{file}.mp4'
+        new_path = path
+        i = 2
+        while os.path.isfile(new_path):
+            new_path = f'{path[:-4]} ({str(i)}).mp4'
+            i += 1
 
         args = [
             'ffmpeg',
@@ -57,12 +64,21 @@ class Scene:
             f'{directory}/%07d.png',
             '-pix_fmt',
             'yuv420p',
-            f'{directory}/{file}.mp4'
+            new_path
         ]
         sp.run(args)
 
         if clean:
             self.clean(directory)
+
+        if view:
+            args = [
+                'vlc',
+                '-f',
+                '-L',
+                new_path
+            ]
+            sp.run(args)
 
     def clean(self, directory):
         for file in glob(f'{directory}/*.png'):

@@ -10,6 +10,7 @@ import typesetting.Animator as tAnimator
 import typesetting.Template as Template
 import typesetting.Tex as Tex
 import typesetting.Title as Title
+import typesetting.tatr as tatr
 
 def genTemplate():
     template = Template()
@@ -17,18 +18,17 @@ def genTemplate():
 
 def introQuote():
     config = {
-        'quote': 'Things which are equal to the same thing are equal to each other',
-        'author': 'Euclid',
-        'style' : {
-            'transform': '',
-            'fill': '#ffffff'
-        },
-        'size': (1920, 1080)
+        tatr.quote: 'Things which are equal to the same thing are equal to '
+                    'each other',
+        tatr.author: 'Euclid',
+        tatr.fill: '#ffffff',
+        tatr.position: (200, 190),
+        tatr.size: (1920*0.8, 1080*0.8)
     }
     quote = Quote(config)
-    res = tAnimator.fade(quote, 100)
-    hold = tAnimator.hold(quote, 100)
-    fade_out = tAnimator.fade(quote, 100, reverse=True)
+    res = tAnimator.fade(quote, 20)
+    hold = tAnimator.hold(quote, 20)
+    fade_out = tAnimator.fade(quote, 20, reverse=True)
     res.addScene(hold)
     res.addScene(fade_out)
 
@@ -37,13 +37,11 @@ def introQuote():
 def mainTitle():
 
     config = {
-        'heading': 'Interpreting Algebra',
-        'subheading': 'An Introduction To Elementary Algebra',
-        'style': {
-            'transform': 'translate(90 45)',
-            'fill': '#ffffff'
-        },
-        'size': (1920, 1080)
+        tatr.heading: 'Interpreting Algebra',
+        tatr.subheading: 'An Introduction To Elementary Algebra',
+        tatr.fill: '#ffffff',
+        tatr.size: (1920*0.8, 1080*0.8),
+        tatr.position: (190, 100)
     }
 
     title = Title(config)
@@ -57,9 +55,15 @@ def mainTitle():
     return res
 
 def sampleLabel():
-    l = Label('abc', (0, 0))
-    f = Frame(l.node)
-    f.write('sampleLabel.svg')
+    config = {
+        tatr.content: 'abc',
+        tatr.position: (0, 0),
+        tatr.radian: np.pi * (7/8),
+        tatr.distance: 50,
+        tatr.size: (sys.maxsize, 40)
+    }
+    l = Label(config)
+    l.frame.write('sampleLabel.svg')
 
 if __name__ == '__main__':
     # genTemplate()
@@ -67,6 +71,6 @@ if __name__ == '__main__':
     # s1 = introQuote()
     # s2 = mainTitle()
     # s1.addScene(s2)
-    # s1.writeVideo('video', 'bug2')
+    # s1.writeVideo('video', 'v', view=True, clean=False)
 
-    t = Tex({'content': 'abc'})
+    sampleLabel()

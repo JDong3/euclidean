@@ -1,3 +1,5 @@
+import copy
+
 from . import tatr
 from .constants import DEFAULT_FILL
 from .constants import QUOTE_FONT_SIZE
@@ -17,15 +19,28 @@ class Quote(Tex):
         :config author:
         :config font_size:
         """
-        author = config[tatr.author]
-        quote = config[tatr.quote]
-        content = Quote.makeContent(quote, author)
-
-        config[tatr.content] = content
+        config = Quote.makeConfig(config)
         Tex.__init__(self, config)
 
     @staticmethod
-    def makeContent(quote, author):
+    def makeConfig(config):
+        DEF_QUOTE = 'no quote'
+        DEF_AUTHOR = 'no author'
+        res = copy.deepcopy(config)
+
+        if not tatr.quote in res:
+            res[tatr.quote] = DEF_QUOTE
+
+        if not tatr.author in config:
+            res[tatr.author] = DEF_AUTHOR
+
+        res[tatr.content] = Quote.makeContent(res)
+        return res
+
+    @staticmethod
+    def makeContent(config):
+        quote = config[tatr.quote]
+        author = config[tatr.author]
         quote_size = QUOTE_FONT_SIZE
         quote_spacing = QUOTE_FONT_SIZE * SPACING_SIZE
         res = rf'''
