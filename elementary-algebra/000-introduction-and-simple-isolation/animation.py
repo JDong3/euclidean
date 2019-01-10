@@ -58,19 +58,12 @@ def sampleLabel():
     config = {
         tatr.content: 'abc',
         tatr.position: (0, 0),
-        tatr.radian: np.pi * (7/8),
-        tatr.distance: 50,
-        tatr.size: (sys.maxsize, 40)
+        tatr.radian: 1.75 * np.pi,
+        tatr.distance: 200,
+        tatr.size: (sys.maxsize, 400)
     }
     l = Label(config)
-    l.frame.write('sampleLabel.svg')
+    l.frame.write('sampleLabel', png=True)
 
 if __name__ == '__main__':
-    # genTemplate()
-
-    # s1 = introQuote()
-    # s2 = mainTitle()
-    # s1.addScene(s2)
-    # s1.writeVideo('video', 'v', view=True, clean=False)
-
     sampleLabel()

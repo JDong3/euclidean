@@ -36,7 +36,8 @@ class Scene:
         for i in range(len(self._frames)):
             args = [
                 'inkscape',
-                '-z', f'{directory}/{i:07}.svg',
+                '-z',
+                f'{directory}/{i:07}.svg',
                 '-e', f'{directory}/{i:07}.png',
                 '-b', DEFAULT_BACKGROUND
             ]
@@ -97,6 +98,3 @@ class Scene:
         for i, frame in enumerate(lst):
             scene.addFrame(frame)
         return scene
-
-# convert *.svg out_%05d.png
-# ffmpeg -framerate 60 -i out_%05d.png -pix_fmt yuv420p out.mp4

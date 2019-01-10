@@ -64,9 +64,8 @@ class Tex(Frameable):
         # this block accomodates for the viewbox in the svg that dvisvgm outputs
         old_x, old_y = node.get('viewBox').split(' ')[-2:]
         old_x, old_y = float(old_x), float(old_y)
-        ratio = old_x/config[tatr.size][0]
-        x, y = ratio * x, ratio * y
-
+        ratio = Tex.getScaleOfFrameToViewBox(node, config)
+        x, y = (1 / ratio) * x, (1 / ratio) * y
         transform = group.get('transform')
         if transform == None:
             transform = ''
@@ -76,20 +75,14 @@ class Tex(Frameable):
     @staticmethod
     def applySize(node, config):
         size = config[tatr.size]
-        aspect_ratio = size[0] / size[1]
         old_size = [node.get('width'), node.get('height')]
 
         for i, dim in enumerate(old_size):
-            res = dim[:-2]
-            res = float(res)
-            old_size[i] = res
-        old_aspect_ratio = old_size[0] / old_size[1]
+            temp = dim[:-2]
+            temp = float(temp)
+            old_size[i] = temp
 
-        # if new ratio is larger than older ratio then our desired picture is wider than the available screen
-        if aspect_ratio > old_aspect_ratio:
-            scale = size[1]/old_size[1]
-        else:
-            scale = size[0]/old_size[0]
+        scale = Tex.getScaleOfFrameToViewBox(node, config)
 
         new_size = [str(x * scale) for x in old_size]
         node.set('width', new_size[0])
@@ -102,6 +95,27 @@ class Tex(Frameable):
     @staticmethod
     def getGroups(node):
         return node.findall('./svg:g', namespaces=STD_TEX_NS)
+
+    @staticmethod
+    def getScaleOfFrameToViewBox(node, config):
+
+        old_size = [node.get('width'), node.get('height')]
+
+        for i, dim in enumerate(old_size):
+            temp = dim[:-2]
+            temp = float(temp)
+            old_size[i] = temp
+
+        old_aspect_ratio = old_size[0]/old_size[1]
+
+        new_size = config[tatr.size]
+        new_aspect_ratio = new_size[0]/new_size[1]
+        if new_aspect_ratio > old_aspect_ratio:
+            scale = new_size[1]/old_size[1]
+        else:
+            scale = new_size[0]/old_size[0]
+
+        return scale
 
     @staticmethod
     def getUse(node):

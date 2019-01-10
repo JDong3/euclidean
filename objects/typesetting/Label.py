@@ -18,21 +18,34 @@ class Label(Tex):
         :config distance: the distance from the position you want to start the
         label
         """
-        config = copy.deepcopy(config)
-
-        radian = config[tatr.radian]
-        position = config[tatr.position]
-        distance = config[tatr.distance]
-        config[tatr.position] = Label.makePosition(radian, position, distance)
+        config = Label.makeConfig(config)
         Tex.__init__(self, config)
-        # Label.setPositions(self.node, self.x, self.y)
 
     @staticmethod
     def makeConfig(config):
-        return None
+        res = copy.deepcopy(config)
+        DEF_RADIAN = 1.5 * np.pi
+        DEF_POSITION = (0, 0)
+        DEF_DISTANCE = 10
+
+        if not tatr.radian in res:
+            res[tatr.radian] = DEF_RADIAN
+
+        if not tatr.distance in res:
+            res[tatr.distance] = DEF_DISTANCE
+
+        if not tatr.position in res:
+            res[tatr.position] = DEF_POSITION
+
+        res[tatr.position] = Label.makePosition(res)
+
+        return res
 
     @staticmethod
-    def makePosition(radian, position, distance):
+    def makePosition(config):
+        radian = config[tatr.radian]
+        position = config[tatr.position]
+        distance = config[tatr.distance]
         x = (distance * np.cos(radian)) + position[0]
-        y = (distance * np.sin(radian)) + position[1]
+        y = -((distance * np.sin(radian)) + position[1])
         return x, y

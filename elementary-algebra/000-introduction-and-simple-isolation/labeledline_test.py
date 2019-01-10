@@ -14,11 +14,14 @@ li = Line(a, b)
 
 config = {
     tatr.content: '123',
-    tatr.radian: 1.5 * np.pi,
-    tatr.position: b.position,
-    tatr.distance: 25
+    tatr.radian: 1.75 * np.pi,
+    tatr.position: (100, 100),
+    tatr.distance: 25,
+    tatr.size: (sys.maxsize, 100)
 }
 la = Label(config)
+la.frame.write('label1', png=True)
 
 ll = LabeledLine(li, la)
-ll.Frame.write('frame1')
+ll.frame.write('frame1', png=True)
+la.frame.write('label2', png=True)
