@@ -12,7 +12,6 @@ class Frame:
         """
         self._root = ET.Element('svg', resolution)
         self.add(node)
-        print(node)
         self.width = int(resolution['width'])
         self.height = int(resolution['height'])
 
@@ -32,16 +31,7 @@ class Frame:
         tree = ET.ElementTree(self._root)
 
         with open(f'{file}.svg', mode) as f:
-            print('prelim --------------------')
-            print(ET.tostring(tree))
             tree.write(open(f'{file}.svg', mode))
-
-        with open(f'{file}.svg', 'r') as f:
-            print('part 1 --------------------')
-            print(ET.tostring(tree))
-            print('part 2 ---------------------')
-            print(f.read())
-            print('done ============================================')
 
         if png:
             args = [

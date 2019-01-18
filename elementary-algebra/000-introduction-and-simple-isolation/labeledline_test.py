@@ -17,11 +17,9 @@ config = {
     tatr.radian: 1.75 * np.pi,
     tatr.position: (100, 100),
     tatr.distance: 25,
-    tatr.size: (sys.maxsize, 100)
+    tatr.size: (sys.maxsize, 25)
 }
 la = Label(config)
-la.frame.write('label1', png=True)
 
 ll = LabeledLine(li, la)
-ll.frame.write('frame1', png=True)
-la.frame.write('label2', png=True)
+ll.frame.write('frame3', png=True)

@@ -17,7 +17,7 @@ class Quote(Tex):
 
         :config quote:
         :config author:
-        :config font_size:
+        :config [font_size]:
         """
         config = Quote.makeConfig(config)
         Tex.__init__(self, config)

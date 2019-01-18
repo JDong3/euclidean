@@ -74,6 +74,13 @@ class Tex(Frameable):
 
     @staticmethod
     def applySize(node, config):
+        new_size = Tex.applySizeResults(node, config)
+        new_size = [str(x) for x in new_size]
+        node.set('width', new_size[0])
+        node.set('height', new_size[1])
+
+    @staticmethod
+    def applySizeResults(node, config):
         size = config[tatr.size]
         old_size = [node.get('width'), node.get('height')]
 
@@ -84,9 +91,9 @@ class Tex(Frameable):
 
         scale = Tex.getScaleOfFrameToViewBox(node, config)
 
-        new_size = [str(x * scale) for x in old_size]
-        node.set('width', new_size[0])
-        node.set('height', new_size[1])
+        new_size = [x * scale for x in old_size]
+
+        return new_size
 
     @staticmethod
     def getGroup(node):
@@ -176,6 +183,23 @@ class Tex(Frameable):
         None -> ET.Element
         this only works if you wrote the file already
         """
+        res = Tex.makeNodeGet(config)
+
+        Tex.applyFill(res, config)
+        Tex.applyOpacity(res, config)
+        Tex.applyPosition(res, config)
+        Tex.applySize(res, config)
+
+        return res
+
+    @staticmethod
+    def makeNodeGet(config):
+        """
+        dict -> ET.Element
+        :helper:
+
+        makes the node if it doesnt exist, gets it afterwards
+        """
         name = Tex.makeName(config)
         path = Tex.makePath(config)
 
@@ -183,11 +207,6 @@ class Tex(Frameable):
             writer = TexWriter(config[tatr.content])
             writer.write(clean=True)
         res = ET.parse(path).getroot()
-
-        Tex.applyFill(res, config)
-        Tex.applyOpacity(res, config)
-        Tex.applyPosition(res, config)
-        Tex.applySize(res, config)
 
         return res
 

@@ -23,7 +23,11 @@ class Label(Tex):
 
     @staticmethod
     def makeConfig(config):
+        """
+        :pre:
+        """
         res = copy.deepcopy(config)
+        DEF_CACHE = True
         DEF_RADIAN = 1.5 * np.pi
         DEF_POSITION = (0, 0)
         DEF_DISTANCE = 10
@@ -47,5 +51,14 @@ class Label(Tex):
         position = config[tatr.position]
         distance = config[tatr.distance]
         x = (distance * np.cos(radian)) + position[0]
-        y = -((distance * np.sin(radian)) + position[1])
+        y = (-1 * distance * np.sin(radian)) + position[1]
+
+        # offset to center the label
+        config = Tex.makeConfig(config)
+
+        node = Tex.makeNodeGet(config)
+        width = Tex.applySizeResults(node, config)[0]
+        offset = width * 0.5 * -1
+        x += offset
+
         return x, y
